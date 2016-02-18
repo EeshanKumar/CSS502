@@ -1,0 +1,4 @@
+This is a list of words.
+Sometimes each word is written more than once.
+How many of these words are written more than once?
+is is is are
