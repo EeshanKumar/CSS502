@@ -17,7 +17,7 @@ int main(int argc, char* argv[])
   string fileName = argv[1];
 
   //Read in characters from file
-  inputFile.open(fileName.c_str());
+  inputFile.open(fileName.c_str(), ios::in | ios::binary);
   while (inputFile.is_open())
   {
     char nextChar;
@@ -37,7 +37,7 @@ int main(int argc, char* argv[])
 
   ofstream outFile;
   string outFileName = (fileName + ".huf").c_str();
-  outFile.open(outFileName);
+  outFile.open(outFileName, ios::out | ios::binary | ios::trunc);
   BitWriter myBitWriter(&outFile);
   int totalCount = myEncoding.getTotalCount();
 

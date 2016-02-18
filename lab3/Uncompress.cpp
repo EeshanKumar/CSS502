@@ -17,7 +17,7 @@ int main(int argc, char* argv[])
   ifstream inputFile;
   string fileName = argv[1];
 
-  inputFile.open(fileName.c_str());
+  inputFile.open(fileName.c_str(), ios::in | ios::binary);
   //Read in frequencies from file
   for (int i = 0; i < 256; i++)
   {
@@ -32,7 +32,7 @@ int main(int argc, char* argv[])
   queue<bool> encodedBits;
   ofstream outFile;
   string outFileName = (fileName + ".puf").c_str();
-  outFile.open(outFileName);
+  outFile.open(outFileName, ios::out | ios::binary | ios::trunc);
 
   //Read in characters from file and queue
   while (inputFile.is_open())
