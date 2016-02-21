@@ -31,9 +31,6 @@ public:
   bool getDecodedChar(int encodedChar, unsigned short numBits, char &decodedChar) const;
 
 
-//Operator Overloads
-
-
 private:
   unsigned int totalCount = 0;
   HuffNode encodingArray[256];
@@ -118,20 +115,21 @@ bool HuffmanEncoder::getEncoding(char charToEncode, unsigned int &bitEncoding, u
 
 bool HuffmanEncoder::getDecodedChar(int encodedChar, unsigned short numBits, char &decodedChar) const
 {
-  return findEncodedChar(rootTree, encodedChar, numBits, decodedChar);
-  // for (int i = 0; i < 256; i++)
-  // {
-  //   unsigned short charNumBits = encodingArray[i].getNumBits();
-  //   int charBitEncoding = encodingArray[i].getBitEncoding();
-  //   if ((charNumBits == numBits) && (charBitEncoding == encodedChar))
-  //   {
-  //     decodedChar = i;
-  //     return true;
-  //   }
-  // }
-  // return false;
+  // return findEncodedChar(rootTree, encodedChar, numBits, decodedChar);
+  for (int i = 0; i < 256; i++)
+  {
+    unsigned short charNumBits = encodingArray[i].getNumBits();
+    int charBitEncoding = encodingArray[i].getBitEncoding();
+    if ((charNumBits == numBits) && (charBitEncoding == encodedChar))
+    {
+      decodedChar = i;
+      return true;
+    }
+  }
+  return false;
 }
 
+// UNFISHED! Partial credit maybe?
 bool HuffmanEncoder::findEncodedChar(HuffNode* subTree, int encodedChar, unsigned short numBits, char &decodedChar) const
 {
   int buf = encodedChar;
@@ -139,38 +137,38 @@ bool HuffmanEncoder::findEncodedChar(HuffNode* subTree, int encodedChar, unsigne
   buf = buf;
   cout << "buf after " << buf << endl;
   return true;
-  // if (buf == 0)
-  // {
-  //   HuffNode* nextTree = subTree->getLeft();
-  //   if (nextTree == NULL)
-  //   {
-  //     return false;
-  //   }
-  //   if (nextTree->getIsSymbol() && (nextTree->getNumBits() == numBits)) {
-  //     decodedChar = nextTree->getSymbol();
-  //     return true;
-  //   }
-  //   else
-  //   {
-  //     return findEncodedChar(subTree->getLeft(), encodedChar << 1, numBits, decodedChar);
-  //   }
-  // }
-  // else
-  // {
-  //   HuffNode* nextTree = subTree->getRight();
-  //   if (nextTree == NULL)
-  //   {
-  //     return false;
-  //   }
-  //   if (nextTree->getIsSymbol() && (nextTree->getNumBits() == numBits)) {
-  //     decodedChar = nextTree->getSymbol();
-  //     return true;
-  //   }
-  //   else
-  //   {
-  //     return findEncodedChar(subTree->getRight(), encodedChar << 1, numBits, decodedChar);
-  //   }
-  // }
+  if (buf == 0)
+  {
+    HuffNode* nextTree = subTree->getLeft();
+    if (nextTree == NULL)
+    {
+      return false;
+    }
+    if (nextTree->getIsSymbol() && (nextTree->getNumBits() == numBits)) {
+      decodedChar = nextTree->getSymbol();
+      return true;
+    }
+    else
+    {
+      return findEncodedChar(subTree->getLeft(), encodedChar << 1, numBits, decodedChar);
+    }
+  }
+  else
+  {
+    HuffNode* nextTree = subTree->getRight();
+    if (nextTree == NULL)
+    {
+      return false;
+    }
+    if (nextTree->getIsSymbol() && (nextTree->getNumBits() == numBits)) {
+      decodedChar = nextTree->getSymbol();
+      return true;
+    }
+    else
+    {
+      return findEncodedChar(subTree->getRight(), encodedChar << 1, numBits, decodedChar);
+    }
+  }
 }
 
 
