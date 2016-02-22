@@ -3,7 +3,6 @@
 #include <queue>
 using namespace std;
 #include "HuffmanEncoder.h"
-#include "BitWriter.h"
 
 int main(int argc, char* argv[])
 {
@@ -17,14 +16,14 @@ int main(int argc, char* argv[])
   ifstream inputFile;
   string fileName = argv[1];
 
-  inputFile.open(fileName.c_str());
+  inputFile.open(fileName.c_str(), ios::in | ios::binary);
   //Read in frequencies from file
   for (int i = 0; i < 256; i++)
   {
     char nextChar = i;
-    int nextFreq;
+    unsigned int nextFreq;
     inputFile >> nextFreq;
-    myEncoding.AddCharWithFrequency(nextChar, nextFreq);
+    myEncoding.AddChar(nextChar, nextFreq);
   }
 
   myEncoding.GenerateHuffmanEncodings();
@@ -32,7 +31,7 @@ int main(int argc, char* argv[])
   queue<bool> encodedBits;
   ofstream outFile;
   string outFileName = (fileName + ".puf").c_str();
-  outFile.open(outFileName);
+  outFile.open(outFileName, ios::out | ios::binary | ios::trunc);
 
   //Read in characters from file and queue
   while (inputFile.is_open())
@@ -53,24 +52,24 @@ int main(int argc, char* argv[])
     }
   }
 
-  int encodedChar = 0;
+  unsigned int bitEncoding = 0;
   unsigned short numBits = 0;
-  char decodingChar;
+  char decodedChar;
   int count = 0;
 
-  while ((count < myEncoding.getTotalCount()) && !(encodedBits.empty()))
+  while ((count < myEncoding.getTotalCharCount()) && !(encodedBits.empty()))
   {
     bool nextBit = encodedBits.front();
     encodedBits.pop();
-    encodedChar = (encodedChar << 1) | nextBit;
+    bitEncoding = (bitEncoding << 1) | nextBit;
     numBits++;
 
-    if (myEncoding.getDecodedChar(encodedChar, numBits, decodingChar))
+    if (myEncoding.getCharFromEncoding(bitEncoding, numBits, decodedChar))
     {
       //Output encoding to filname.huf
-      outFile << decodingChar;
+      outFile << decodedChar;
       count++;
-      encodedChar = 0;
+      bitEncoding = 0;
       numBits = 0;
     }
   }

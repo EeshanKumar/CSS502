@@ -17,7 +17,7 @@ int main(int argc, char* argv[])
   string fileName = argv[1];
 
   //Read in characters from file
-  inputFile.open(fileName.c_str());
+  inputFile.open(fileName.c_str(), ios::in | ios::binary);
   while (inputFile.is_open())
   {
     char nextChar;
@@ -28,18 +28,15 @@ int main(int argc, char* argv[])
       inputFile.close();
       continue;
     }
-    myEncoding.AddChar(nextChar);
+    myEncoding.AddChar(nextChar, 1);
   }
 
   myEncoding.GenerateHuffmanEncodings();
-  myEncoding.Print();
-
 
   ofstream outFile;
   string outFileName = (fileName + ".huf").c_str();
-  outFile.open(outFileName);
+  outFile.open(outFileName, ios::out | ios::binary | ios::trunc);
   BitWriter myBitWriter(&outFile);
-  int totalCount = myEncoding.getTotalCount();
 
   myEncoding.PrintFrequenciesToOutStream(outFile);
 
@@ -59,7 +56,7 @@ int main(int argc, char* argv[])
       inputFile.close();
       continue;
     }
-    if (myEncoding.getEncoding(nextChar, bitEncoding, numBits))
+    if (myEncoding.getEncodingFromChar(nextChar, bitEncoding, numBits))
     {
       //Output encoding to filname.huf
       myBitWriter.WriteBits(bitEncoding, numBits);
