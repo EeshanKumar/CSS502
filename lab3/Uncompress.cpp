@@ -67,7 +67,6 @@ int main(int argc, char* argv[])
     if (myEncoding.getCharFromEncoding(bitEncoding, numBits, decodedChar))
     {
       //Output encoding to filname.huf
-      cout << "Printing: " << decodedChar << endl;
       outFile << decodedChar;
       count++;
       bitEncoding = 0;
