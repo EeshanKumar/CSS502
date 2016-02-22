@@ -56,9 +56,7 @@ bool HuffmanEncoder::getCharFromEncoding(unsigned int bitEncoding, unsigned shor
 {
   for (int i = 0; i < 256; i++)
   {
-    unsigned short charNumBits = encodingArray[i].getNumBits();
-    unsigned int charBitEncoding = encodingArray[i].getBitEncoding();
-    if ((charNumBits == numBits) && (charBitEncoding == bitEncoding))
+    if ((encodingArray[i].getNumBits() == numBits) && (encodingArray[i].getBitEncoding() == bitEncoding))
     {
       decodedChar = encodingArray[i].getSymbol();
       return true;
