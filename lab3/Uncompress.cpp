@@ -24,7 +24,7 @@ int main(int argc, char* argv[])
     char nextChar = i;
     int nextFreq;
     inputFile >> nextFreq;
-    myEncoding.AddCharWithFrequency(nextChar, nextFreq);
+    myEncoding.AddFreqToChar(nextChar, nextFreq);
   }
 
   myEncoding.GenerateHuffmanEncodings();
@@ -58,7 +58,7 @@ int main(int argc, char* argv[])
   char decodingChar;
   int count = 0;
 
-  while ((count < myEncoding.getTotalCount()) && !(encodedBits.empty()))
+  while ((count < myEncoding.getTotalCharCount()) && !(encodedBits.empty()))
   {
     bool nextBit = encodedBits.front();
     encodedBits.pop();
