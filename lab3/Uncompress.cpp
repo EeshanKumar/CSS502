@@ -3,7 +3,6 @@
 #include <queue>
 using namespace std;
 #include "HuffmanEncoder.h"
-#include "BitWriter.h"
 
 int main(int argc, char* argv[])
 {
@@ -22,9 +21,9 @@ int main(int argc, char* argv[])
   for (int i = 0; i < 256; i++)
   {
     char nextChar = i;
-    int nextFreq;
+    unsigned int nextFreq;
     inputFile >> nextFreq;
-    myEncoding.AddFreqToChar(nextChar, nextFreq);
+    myEncoding.AddChar(nextChar, nextFreq);
   }
 
   myEncoding.GenerateHuffmanEncodings();
@@ -53,24 +52,25 @@ int main(int argc, char* argv[])
     }
   }
 
-  int encodedChar = 0;
+  unsigned int bitEncoding = 0;
   unsigned short numBits = 0;
-  char decodingChar;
+  char decodedChar;
   int count = 0;
 
   while ((count < myEncoding.getTotalCharCount()) && !(encodedBits.empty()))
   {
     bool nextBit = encodedBits.front();
     encodedBits.pop();
-    encodedChar = (encodedChar << 1) | nextBit;
+    bitEncoding = (bitEncoding << 1) | nextBit;
     numBits++;
 
-    if (myEncoding.getDecodedChar(encodedChar, numBits, decodingChar))
+    if (myEncoding.getCharFromEncoding(bitEncoding, numBits, decodedChar))
     {
       //Output encoding to filname.huf
-      outFile << decodingChar;
+      cout << "Printing: " << decodedChar << endl;
+      outFile << decodedChar;
       count++;
-      encodedChar = 0;
+      bitEncoding = 0;
       numBits = 0;
     }
   }

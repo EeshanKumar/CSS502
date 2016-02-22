@@ -33,7 +33,6 @@ int main(int argc, char* argv[])
 
   myEncoding.GenerateHuffmanEncodings();
 
-
   ofstream outFile;
   string outFileName = (fileName + ".huf").c_str();
   outFile.open(outFileName, ios::out | ios::binary | ios::trunc);

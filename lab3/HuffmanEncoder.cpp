@@ -35,92 +35,62 @@ int HuffmanEncoder::getTotalCharCount() const
   return totalCharCount;
 }
 
-bool HuffmanEncoder::getEncodingFromChar(char charToEncode, unsigned int &bitEncoding, unsigned short &numBits) const
+bool HuffmanEncoder::getFreqFromChar(char lookupChar, unsigned int &frequency) const
 {
-  if (encodingArray[charToEncode].getNumBits() == 0)
+  frequency = encodingArray[lookupChar].getFrequency();
+  return true;
+}
+
+bool HuffmanEncoder::getEncodingFromChar(char lookupChar, unsigned int &bitEncoding, unsigned short &numBits) const
+{
+  if (encodingArray[lookupChar].getNumBits() == 0)
   {
     return false;
   }
-  bitEncoding = encodingArray[charToEncode].getBitEncoding();
-  numBits = encodingArray[charToEncode].getNumBits();
+  bitEncoding = encodingArray[lookupChar].getBitEncoding();
+  numBits = encodingArray[lookupChar].getNumBits();
   return true;
 }
 
 bool HuffmanEncoder::getCharFromEncoding(unsigned int bitEncoding, unsigned short numBits, char &decodedChar) const
 {
-  // return findEncodedChar(rootTree, bitEncoding, numBits, decodedChar);
   for (int i = 0; i < 256; i++)
   {
     unsigned short charNumBits = encodingArray[i].getNumBits();
     unsigned int charBitEncoding = encodingArray[i].getBitEncoding();
     if ((charNumBits == numBits) && (charBitEncoding == bitEncoding))
     {
-      decodedChar = i;
+      decodedChar = encodingArray[i].getSymbol();
       return true;
     }
   }
   return false;
 }
 
-
 bool HuffmanEncoder::AddChar(char insChar, unsigned int frequency)
 {
-  int insInt = insChar;
-  encodingArray[insInt].IncrementFrequency(frequency);
+  encodingArray[insChar].IncrementFrequency(frequency);
   totalCharCount += frequency;
   return true;
 }
+
 bool HuffmanEncoder::RemoveChar(char insChar, unsigned int frequency)
 {
   if (encodingArray[insChar].getFrequency() == 0)
   {
     return false;
   }
-  encodingArray[insChar].DecrementFrequency(frequency * -1);
-  totalCharCount -= frequency;
-  return true;
-}
+  encodingArray[insChar].DecrementFrequency(frequency);
 
-// UNFISHED! Partial credit maybe?
-bool HuffmanEncoder::findEncodedChar(HuffNode* subTree, int encodedChar, unsigned short numBits, char &decodedChar) const
-{
-  int buf = encodedChar;
-  cout << "buf before " << buf << endl;
-  buf = buf;
-  cout << "buf after " << buf << endl;
-  return true;
-  if (buf == 0)
+  if (frequency > totalCharCount)
   {
-    HuffNode* nextTree = subTree->getLeft();
-    if (nextTree == NULL)
-    {
-      return false;
-    }
-    if (nextTree->getIsSymbol() && (nextTree->getNumBits() == numBits)) {
-      decodedChar = nextTree->getSymbol();
-      return true;
-    }
-    else
-    {
-      return findEncodedChar(subTree->getLeft(), encodedChar << 1, numBits, decodedChar);
-    }
+    totalCharCount = 0;
   }
   else
   {
-    HuffNode* nextTree = subTree->getRight();
-    if (nextTree == NULL)
-    {
-      return false;
-    }
-    if (nextTree->getIsSymbol() && (nextTree->getNumBits() == numBits)) {
-      decodedChar = nextTree->getSymbol();
-      return true;
-    }
-    else
-    {
-      return findEncodedChar(subTree->getRight(), encodedChar << 1, numBits, decodedChar);
-    }
+    totalCharCount -= frequency;
   }
+  return true;
 }
 
 bool HuffmanEncoder::GenerateHuffmanEncodings()
@@ -143,7 +113,7 @@ bool HuffmanEncoder::GenerateHuffmanTree()
     }
   }
 
-  while (myPriorityQueue.getCount() > 1)
+  while (myPriorityQueue.getCount() >= 2)
   {
     HuffNode huff1;
     HuffNode huff2;
@@ -169,7 +139,7 @@ bool HuffmanEncoder::GenerateHuffmanTree()
   myPriorityQueue.Remove(rootHuffNode);
   insNode = new HuffNode(rootHuffNode);
 
-  rootTree = insNode;
+  this->rootTree = insNode;
   return true;
 }
 void HuffmanEncoder::setEncodings(HuffNode* subTree)
@@ -180,19 +150,23 @@ void HuffmanEncoder::setEncodings(HuffNode* subTree)
   }
   if (subTree->getIsSymbol())
   {
-    encodingArray[subTree->getSymbol()] = *subTree;
+    char encodedChar = subTree->getSymbol();
+    encodingArray[encodedChar] = *subTree;
   }
 
-  if (subTree->getLeft() != NULL)
+  HuffNode* left = subTree->getLeft();
+  HuffNode* right = subTree->getRight();
+
+  if (left != NULL)
   {
-    (subTree->getLeft())->setNumBits(subTree->getNumBits() + 1);
-    (subTree->getLeft())->setBitEncoding(subTree->getBitEncoding() * 2);
+    left->setNumBits(subTree->getNumBits() + 1);
+    left->setBitEncoding(subTree->getBitEncoding() * 2);
     setEncodings(subTree->getLeft());
   }
-  if (subTree->getRight() != NULL)
+  if (right != NULL)
   {
-    (subTree->getRight())->setNumBits(subTree->getNumBits() + 1);
-    (subTree->getRight())->setBitEncoding((subTree->getBitEncoding() * 2) + 1);
+    right->setNumBits(subTree->getNumBits() + 1);
+    right->setBitEncoding((subTree->getBitEncoding() * 2) + 1);
     setEncodings(subTree->getRight());
   }
 }
@@ -213,9 +187,17 @@ void HuffmanEncoder::clearHuffmanTreeHelper(HuffNode* &subTree)
   subTree = NULL;
 }
 
+void HuffmanEncoder::PrintFrequenciesToOutStream(ostream &outStream) const
+{
+  for (int i = 0; i < 256; i++)
+  {
+    outStream << encodingArray[i].getFrequency() << endl;
+  }
+}
+
 void HuffmanEncoder::PrintHuffmanTree() const
 {
-  printHuffmanSubTree(rootTree);
+  printHuffmanSubTree(this->rootTree);
 }
 
 void HuffmanEncoder::printHuffmanSubTree(HuffNode* subTree) const
@@ -229,12 +211,4 @@ void HuffmanEncoder::printHuffmanSubTree(HuffNode* subTree) const
   printHuffmanSubTree(left);
   cout << *subTree;
   printHuffmanSubTree(right);
-}
-
-void HuffmanEncoder::PrintFrequenciesToOutStream(ostream &outStream) const
-{
-  for (int i = 0; i < 256; i++)
-  {
-    outStream << encodingArray[i].getFrequency() << endl;
-  }
 }

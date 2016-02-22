@@ -1,3 +1,4 @@
+#include <iostream>
 #include <vector>
 using namespace std;
 
@@ -8,31 +9,35 @@ class PriorityQueue
   friend ostream& operator<<(ostream &outStream, PriorityQueue<T> &myPriorityQueue);
 
 public:
+//Constructors & Destructors
   PriorityQueue();
   ~PriorityQueue();
+
+//Getters
+  int getCount() const;
+
+//Public Functions
   void Add(const ItemType &item);
   bool Peek(ItemType &item);
   bool Remove(ItemType &item);
 
-  int getCount() const;
-
 private:
   vector<ItemType> minHeap;
   int count = 0;
+
   void percolateDown(int position);
   void swap(ItemType &item1, ItemType &item2);
 };
 
+//Becasue this is a templated class, the implementation is sub optimally in the .h file
+
 template <class T>
 ostream& operator<<(ostream &outStream, PriorityQueue<T> &myPriorityQueue)
 {
-  int size = myPriorityQueue.minHeap.size();
-  for (int i = 1; i < size; i++)
+  int size = myPriorityQueue.getCount();
+  for (int i = 1; i <= size; i++)
   {
-    T item;
-    myPriorityQueue.Remove(item);
-    outStream << item;
-    // outStream << myPriorityQueue.minHeap[i];
+    outStream << myPriorityQueue.minHeap[i];
   }
   return outStream;
 }
@@ -43,9 +48,16 @@ PriorityQueue<ItemType>::PriorityQueue()
   ItemType blank;
   minHeap.push_back(blank);
 }
+
 template <class ItemType>
 PriorityQueue<ItemType>::~PriorityQueue()
 {
+}
+
+template <class ItemType>
+int PriorityQueue<ItemType>::getCount() const
+{
+  return count;
 }
 
 template <class ItemType>
@@ -91,12 +103,6 @@ bool PriorityQueue<ItemType>::Remove(ItemType &item)
     percolateDown(1);
   }
   return true;
-}
-
-template <class ItemType>
-int PriorityQueue<ItemType>::getCount() const
-{
-  return count;
 }
 
 template <class ItemType>

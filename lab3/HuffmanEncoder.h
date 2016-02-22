@@ -1,3 +1,4 @@
+#pragma once
 #include <iostream>
 using namespace std;
 #include "PriorityQueue.h"
@@ -36,8 +37,6 @@ private:
   HuffNode* rootTree = NULL;
 
   void initializeEncodingArray();
-
-  bool findEncodedChar(HuffNode* subTree, int encodedChar, unsigned short numBits, char &decodedChar) const;
   void setEncodings(HuffNode* subTree);
   void clearHuffmanTreeHelper(HuffNode* &subTree);
   void printHuffmanSubTree(HuffNode* subTree) const;
