@@ -20,9 +20,9 @@ int main(int argc, char* argv[])
   //Read in frequencies from file
   for (int i = 0; i < 256; i++)
   {
-    char nextChar = i;
+    unsigned char nextChar = i;
     unsigned int nextFreq;
-    inputFile >> nextFreq;
+    inputFile >> noskipws >> nextFreq;
     myEncoding.AddChar(nextChar, nextFreq);
   }
 
@@ -39,7 +39,7 @@ int main(int argc, char* argv[])
     // Take in next string
     unsigned char nextChar;
 
-    inputFile >> nextChar;
+    inputFile >> noskipws >> nextChar;
 
     if (inputFile.eof())
     {
@@ -54,7 +54,7 @@ int main(int argc, char* argv[])
 
   unsigned int bitEncoding = 0;
   unsigned short numBits = 0;
-  char decodedChar;
+  unsigned char decodedChar;
   int count = 0;
 
   while ((count < myEncoding.getTotalCharCount()) && !(encodedBits.empty()))
@@ -67,6 +67,7 @@ int main(int argc, char* argv[])
     if (myEncoding.getCharFromEncoding(bitEncoding, numBits, decodedChar))
     {
       //Output encoding to filname.huf
+      cout << decodedChar;
       outFile << decodedChar;
       count++;
       bitEncoding = 0;

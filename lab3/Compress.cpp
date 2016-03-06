@@ -20,7 +20,7 @@ int main(int argc, char* argv[])
   inputFile.open(fileName.c_str(), ios::in | ios::binary);
   while (inputFile.is_open())
   {
-    char nextChar;
+    unsigned char nextChar;
     inputFile >> noskipws >> nextChar;
 
     if (inputFile.eof())
@@ -45,7 +45,7 @@ int main(int argc, char* argv[])
   while (inputFile.is_open())
   {
     // Take in next string
-    char nextChar;
+    unsigned char nextChar;
     unsigned int bitEncoding;
     unsigned short numBits;
 

@@ -35,13 +35,13 @@ int HuffmanEncoder::getTotalCharCount() const
   return totalCharCount;
 }
 
-bool HuffmanEncoder::getFreqFromChar(char lookupChar, unsigned int &frequency) const
+bool HuffmanEncoder::getFreqFromChar(unsigned char lookupChar, unsigned int &frequency) const
 {
   frequency = encodingArray[lookupChar].getFrequency();
   return true;
 }
 
-bool HuffmanEncoder::getEncodingFromChar(char lookupChar, unsigned int &bitEncoding, unsigned short &numBits) const
+bool HuffmanEncoder::getEncodingFromChar(unsigned char lookupChar, unsigned int &bitEncoding, unsigned short &numBits) const
 {
   if (encodingArray[lookupChar].getNumBits() == 0)
   {
@@ -52,7 +52,7 @@ bool HuffmanEncoder::getEncodingFromChar(char lookupChar, unsigned int &bitEncod
   return true;
 }
 
-bool HuffmanEncoder::getCharFromEncoding(unsigned int bitEncoding, unsigned short numBits, char &decodedChar) const
+bool HuffmanEncoder::getCharFromEncoding(unsigned int bitEncoding, unsigned short numBits, unsigned char &decodedChar) const
 {
   for (int i = 0; i < 256; i++)
   {
@@ -65,14 +65,14 @@ bool HuffmanEncoder::getCharFromEncoding(unsigned int bitEncoding, unsigned shor
   return false;
 }
 
-bool HuffmanEncoder::AddChar(char insChar, unsigned int frequency)
+bool HuffmanEncoder::AddChar(unsigned char insChar, unsigned int frequency)
 {
   encodingArray[insChar].IncrementFrequency(frequency);
   totalCharCount += frequency;
   return true;
 }
 
-bool HuffmanEncoder::RemoveChar(char insChar, unsigned int frequency)
+bool HuffmanEncoder::RemoveChar(unsigned char insChar, unsigned int frequency)
 {
   if (encodingArray[insChar].getFrequency() == 0)
   {
@@ -148,7 +148,7 @@ void HuffmanEncoder::setEncodings(HuffNode* subTree)
   }
   if (subTree->getIsSymbol())
   {
-    char encodedChar = subTree->getSymbol();
+    unsigned char encodedChar = subTree->getSymbol();
     encodingArray[encodedChar] = *subTree;
   }
 
@@ -159,13 +159,13 @@ void HuffmanEncoder::setEncodings(HuffNode* subTree)
   {
     left->setNumBits(subTree->getNumBits() + 1);
     left->setBitEncoding(subTree->getBitEncoding() * 2);
-    setEncodings(subTree->getLeft());
+    setEncodings(left);
   }
   if (right != NULL)
   {
     right->setNumBits(subTree->getNumBits() + 1);
     right->setBitEncoding((subTree->getBitEncoding() * 2) + 1);
-    setEncodings(subTree->getRight());
+    setEncodings(right);
   }
 }
 void HuffmanEncoder::ClearHuffmanTree()

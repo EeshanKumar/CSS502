@@ -9,15 +9,15 @@ class HuffNode
 public:
 //Constructors & Destructors
   HuffNode();
-  HuffNode(char symbol);
-  HuffNode(char symbol, unsigned int frequency);
-  HuffNode(char symbol, unsigned int frequency, unsigned int bitEncoding);
-  HuffNode(char symbol, unsigned int frequency, unsigned int bitEncoding, unsigned short numBits);
+  HuffNode(unsigned char symbol);
+  HuffNode(unsigned char symbol, unsigned int frequency);
+  HuffNode(unsigned char symbol, unsigned int frequency, unsigned int bitEncoding);
+  HuffNode(unsigned char symbol, unsigned int frequency, unsigned int bitEncoding, unsigned short numBits);
   HuffNode(unsigned int frequency, bool isSymbol);
   ~HuffNode();
 
 //Getters
-  char getSymbol() const;
+  unsigned char getSymbol() const;
   unsigned int getFrequency() const;
   unsigned int getBitEncoding() const;
   unsigned short getNumBits() const;
@@ -26,7 +26,7 @@ public:
   HuffNode* &getRight();
 
 //Setters
-  bool setSymbol(char symbol);
+  bool setSymbol(unsigned char symbol);
   bool setFrequency(unsigned int frequency);
   bool setBitEncoding(unsigned int bitEncoding);
   bool setNumBits(unsigned short numBits);
@@ -47,7 +47,7 @@ public:
   bool operator!=(const HuffNode &rhs) const;
 
 private:
-  char symbol;
+  unsigned char symbol;
   unsigned int frequency = 0;
   unsigned int bitEncoding = 0;
   unsigned short numBits = 0;

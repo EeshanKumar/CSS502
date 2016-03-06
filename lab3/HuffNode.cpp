@@ -20,20 +20,20 @@ HuffNode::HuffNode()
 {
 }
 
-HuffNode::HuffNode(char symbol)
+HuffNode::HuffNode(unsigned char symbol)
 {
   this->symbol = symbol;
   this->isSymbol = true;
 }
 
-HuffNode::HuffNode(char symbol, unsigned int frequency)
+HuffNode::HuffNode(unsigned char symbol, unsigned int frequency)
 {
   this->symbol = symbol;
   this->frequency = frequency;
   this->isSymbol = true;
 }
 
-HuffNode::HuffNode(char symbol, unsigned int frequency, unsigned int bitEncoding)
+HuffNode::HuffNode(unsigned char symbol, unsigned int frequency, unsigned int bitEncoding)
 {
   this->symbol = symbol;
   this->frequency = frequency;
@@ -41,7 +41,7 @@ HuffNode::HuffNode(char symbol, unsigned int frequency, unsigned int bitEncoding
   this->isSymbol = true;
 }
 
-HuffNode::HuffNode(char symbol, unsigned int frequency, unsigned int bitEncoding, unsigned short numBits)
+HuffNode::HuffNode(unsigned char symbol, unsigned int frequency, unsigned int bitEncoding, unsigned short numBits)
 {
   this->symbol = symbol;
   this->frequency = frequency;
@@ -61,7 +61,7 @@ HuffNode::~HuffNode()
 }
 
 
-char HuffNode::getSymbol() const
+unsigned char HuffNode::getSymbol() const
 {
   return symbol;
 }
@@ -90,7 +90,7 @@ HuffNode*& HuffNode::getRight()
   return right;
 }
 
-bool HuffNode::setSymbol(char symbol)
+bool HuffNode::setSymbol(unsigned char symbol)
 {
   this->symbol = symbol;
   this->isSymbol = true;

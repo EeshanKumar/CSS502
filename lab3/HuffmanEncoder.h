@@ -16,13 +16,13 @@ public:
 //Getters
   int getTotalCharCount() const;
 
-  bool getFreqFromChar(char lookupChar, unsigned int &frequency) const;
-  bool getEncodingFromChar(char lookupChar, unsigned int &bitEncoding, unsigned short &numBits) const;
-  bool getCharFromEncoding(unsigned int lookupBitEncoding, unsigned short numBits, char &decodedChar) const;
+  bool getFreqFromChar(unsigned char lookupChar, unsigned int &frequency) const;
+  bool getEncodingFromChar(unsigned char lookupChar, unsigned int &bitEncoding, unsigned short &numBits) const;
+  bool getCharFromEncoding(unsigned int lookupBitEncoding, unsigned short numBits, unsigned char &decodedChar) const;
 
 //Public Functions
-  bool AddChar(char insChar, unsigned int frequency);
-  bool RemoveChar(char insChar, unsigned int frequency);
+  bool AddChar(unsigned char insChar, unsigned int frequency);
+  bool RemoveChar(unsigned char insChar, unsigned int frequency);
 
   bool GenerateHuffmanEncodings();
   bool GenerateHuffmanTree();
