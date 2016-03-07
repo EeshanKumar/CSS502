@@ -1,0 +1,32 @@
+#! /bin/bash
+
+rm Compress
+rm Expand
+
+DATA=$1
+
+clear
+
+echo -e "Compiling Compress \n"
+g++ -std=c++11 Compress.cpp FrequencyTable.cpp HuffmanTree.cpp HuffmanNode.cpp HuffmanPQueue.cpp BitStream.cpp -o Compress
+
+echo -e "Compressing ${DATA} \n"
+valgrind ./Compress ${DATA}
+
+echo -e "Compiling Expand \n"
+g++ -std=c++11 Expand.cpp FrequencyTable.cpp HuffmanTree.cpp HuffmanNode.cpp HuffmanPQueue.cpp BitStream.cpp -o Expand
+
+echo -e "Expanding ${DATA}.huf \n"
+valgrind ./Expand ${DATA}.huf
+
+
+cmp ${DATA} ${DATA}.huf.puf
+
+original_size=$(cat ${DATA} | wc -c)
+compressed_size=$(cat ${DATA}.huf | wc -c)
+
+echo -e "Original size ${original_size}"
+echo -e "Compressed size ${compressed_size}"
+echo ${original_size} ${compressed_size} | awk '{printf "Compression Ratio: %d%%\n", 100.0 * ($2 / $1);}'
+
+exit 0
