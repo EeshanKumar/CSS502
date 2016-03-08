@@ -18,7 +18,6 @@ public:
 
 //Constructors + Desctructors
   BST();
-  BST(const BST<ItemType> &srcBST);
   ~BST();
 
 //Public Functions
@@ -28,11 +27,6 @@ public:
   int Height() const;
   void ClearTree();
   bool isEmpty() const;
-
-//Operator Overload
-  BST<ItemType>& operator=(const BST<ItemType> &srcTree);
-  BST<ItemType> operator+(const BST<ItemType> &srcTree) const;
-  BST<ItemType>& operator+=(const BST<ItemType> &srcTree);
 
 
 private:
@@ -65,8 +59,6 @@ private:
   void deleteSubTree(Node * &subTree);
   int heightHelper(Node *subTree) const;
   ostream& print(ostream &outStream, Node* subTree) const;
-  void copy(Node * &toSubTree, Node * toSubTreeParent, Node *srcSubTree);
-  void plusEqualOperatorHelper(Node * subTree);
 };
 
 template <class T>
@@ -178,8 +170,7 @@ int BST<ItemType>::addToTree(Node* &subTree, Node* parentNode, const ItemType *i
   if (subTree == NULL)
   {
     Node *insNode = new Node();
-    ItemType *insItem = new ItemType(*item);
-    insNode->item = insItem;
+    insNode->item = item;
     insNode->count = count;
     insNode->color = red;
     insNode->parent = parentNode;
@@ -458,64 +449,4 @@ ostream& BST<ItemType>::print(ostream &outStream, Node* subTree) const
   outStream << "Count: " << subTree->count << endl << endl;
   print(outStream, subTree->right);
   return outStream;
-}
-
-template <class ItemType>
-BST<ItemType>& BST<ItemType>::operator=(const BST<ItemType> &srcTree)
-{
-  if (this == &srcTree)
-  {
-    return *this;
-  }
-  this->ClearTree();
-  this->root = NULL;
-  this->copy(this->root, NULL, srcTree.root);
-  return *this;
-}
-
-template <class ItemType>
-void BST<ItemType>::copy(Node * &toSubTree, Node * toSubTreeParent, Node *srcSubTree)
-{
-  if (srcSubTree == NULL)
-  {
-    return;
-  }
-  Node *insNode = new Node();
-  ItemType *insItem = new ItemType();
-  *insItem = *(srcSubTree->item);
-  insNode->item = insItem;
-  insNode->count = srcSubTree->count;
-  insNode->color = srcSubTree->color;
-  toSubTree = insNode;
-  toSubTree->parent = toSubTreeParent;
-  copy(toSubTree->left, toSubTree, srcSubTree->left);
-  copy(toSubTree->right, toSubTree, srcSubTree->right);
-}
-
-template <class ItemType>
-BST<ItemType> BST<ItemType>::operator+(const BST<ItemType> &srcTree) const
-{
-  BST<ItemType> returnTree;
-  returnTree = *this;
-  returnTree += srcTree;
-  return returnTree;
-}
-
-template <class ItemType>
-BST<ItemType>& BST<ItemType>::operator+=(const BST<ItemType> &srcTree)
-{
-  plusEqualOperatorHelper(srcTree.root);
-  return *this;
-}
-
-template <class ItemType>
-void BST<ItemType>::plusEqualOperatorHelper(Node * subTree)
-{
-  if (subTree == NULL)
-  {
-    return;
-  }
-  this->addToTree(this->root, NULL, subTree->item, subTree->count);
-  this->plusEqualOperatorHelper(subTree->left);
-  this->plusEqualOperatorHelper(subTree->right);
 }
