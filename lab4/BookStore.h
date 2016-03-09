@@ -15,8 +15,8 @@ public:
   BookStore();
   ~BookStore();
 
-  bool AddBook(Book* insBook);
-  bool RemoveBook(Book target, Book &removedBook);
+  bool AddBook(Book* insBook, int copies);
+  bool RemoveBook(Book* target, Book &removedBookPointer);
 
 private:
   BST<Book> inventory;

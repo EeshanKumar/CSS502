@@ -21,7 +21,7 @@ public:
   ~BST();
 
 //Public Functions
-  int InsertOrIncrement(ItemType *item);
+  int Insert(ItemType *item, int count);
   int RemoveOrDecrement(ItemType target, ItemType &result);
   int Count(ItemType targetItem) const;
   int Height() const;
@@ -42,7 +42,7 @@ private:
   };
   Node *root = NULL;
 
-  int addToTree(Node* &subTree, Node* parentNode, const ItemType *item, int count);
+  int addToTree(Node* &subTree, Node* parentNode, ItemType *item, int count);
   typename BST<ItemType>::Node* grandparent(Node* subTree);
   typename BST<ItemType>::Node* uncle(Node* subTree);
   void verifyProperties(Node* subTree);
@@ -75,22 +75,15 @@ BST<ItemType>::BST()
 }
 
 template <class ItemType>
-BST<ItemType>::BST(const BST &srcBST)
-{
-  root = NULL;
-  *this = srcBST;
-}
-
-template <class ItemType>
 BST<ItemType>::~BST()
 {
   this->ClearTree();
 }
 
 template <class ItemType>
-int BST<ItemType>::InsertOrIncrement( ItemType *item )
+int BST<ItemType>::Insert( ItemType *item, int count )
 {
-  return addToTree(this->root, NULL, item, 1);
+  return addToTree(this->root, NULL, item, count);
 }
 
 template <class ItemType>
@@ -165,7 +158,7 @@ int BST<ItemType>::heightHelper(Node *subTree) const
 }
 
 template <class ItemType>
-int BST<ItemType>::addToTree(Node* &subTree, Node* parentNode, const ItemType *item, int count)
+int BST<ItemType>::addToTree(Node* &subTree, Node* parentNode, ItemType* item, int count)
 {
   if (subTree == NULL)
   {

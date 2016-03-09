@@ -19,24 +19,28 @@ Book::Book()
   author = "";
   title = "";
   cost = 0;
+  quality = New;
 }
 Book::Book(string author)
 {
   this->author = author;
   title = "";
   cost = 0;
+  quality = New;
 }
 Book::Book(string author, string title)
 {
   this->author = author;
   this->title = title;
   cost = 0;
+  quality = New;
 }
 Book::Book(string author, string title, float cost)
 {
   this->author = author;
   this->title = title;
   this->cost = cost;
+  quality = New;
 }
 Book::Book(string author, string title, float cost, string quality)
 {
@@ -83,19 +87,19 @@ bool Book::setCost(float cost)
 }
 bool Book::setQuality(string quality)
 {
-  if (quality == "n" || quality == "new")
+  if (quality == "N" || quality == "new")
   {
     this->quality = New;
   }
-  if (quality == "e" || quality == "excellent")
+  if (quality == "E" || quality == "excellent")
   {
     this->quality = Excellent;
   }
-  if (quality == "g" || quality == "good")
+  if (quality == "G" || quality == "good")
   {
     this->quality = Good;
   }
-  if (quality == "f" || quality == "fair")
+  if (quality == "F" || quality == "fair")
   {
     this->quality = Fair;
   }

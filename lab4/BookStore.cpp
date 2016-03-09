@@ -2,7 +2,7 @@
 
 ostream& operator<<(ostream &outStream, const BookStore &bookStoreToPrint)
 {
-  outStream << bookStoreToPrint.inventory << endl;
+  outStream << bookStoreToPrint.inventory;
 }
 
 BookStore::BookStore()
@@ -12,15 +12,15 @@ BookStore::~BookStore()
 {
 }
 
-bool BookStore::AddBook(Book* insBook)
+bool BookStore::AddBook(Book* insBook, int copies)
 {
-  inventory.InsertOrIncrement(insBook);
+  inventory.Insert(insBook, copies);
   return true;
 }
-bool BookStore::RemoveBook(Book target, Book &removedBook)
+bool BookStore::RemoveBook(Book* target, Book &removedBookPointer)
 {
   int copiesLeft;
-  copiesLeft = inventory.RemoveOrDecrement(target, removedBook);
+  copiesLeft = inventory.RemoveOrDecrement(*target, removedBookPointer);
   if (copiesLeft == -1) {
     return false;
   }
