@@ -16,12 +16,13 @@ friend ostream& operator<<(ostream &outStream, const BookStore &bookStoreToPrint
 public:
   BookStore();
   ~BookStore();
-
   bool AddBook(Book* insBook, int copies);
   bool RemoveBook(Book* target, Book &removedBookPointer);
 
   bool AddCustomer(Customer* insCustomer);
   bool RemoveCustomer(Customer target, Customer &removedCustomer);
+
+  void ProcessTransactionData(vector<string> transactionData);
 
 private:
   BST<Book> inventory;

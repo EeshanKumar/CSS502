@@ -35,3 +35,12 @@ bool BookStore::AddCustomer(Customer* insCustomer)
 {
   customers.setItem(insCustomer->getLastName(), insCustomer);
 }
+bool BookStore::RemoveCustomer(Customer target, Customer &removedCustomer)
+{
+
+}
+
+void BookStore::ProcessTransactionData(vector<string> transactionData)
+{
+
+}

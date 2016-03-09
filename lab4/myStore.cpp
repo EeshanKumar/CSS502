@@ -166,13 +166,7 @@ int main(int argc, char* argv[])
       string str(token);
       transactionData.push_back(str);
     }
-    for (int i = 0; i < transactionData.size(); ++i)
-    {
-      cout << transactionData[i] << " ";
-    }
-    cout << endl;
-    // transactionData.erase(transactionData.begin());
-    // cout << transactionData.front() << endl;
+    myBookStore.ProcessTransactionData(transactionData);
   }
 
   return 0;
@@ -266,6 +260,3 @@ int main(int argc, char* argv[])
   // cout << *pBook << endl;
   // comic1.PrintDetails(cout);
   // book2.PrintDetails(cout);
-
-  return 0;
-}
