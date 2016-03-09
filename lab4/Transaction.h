@@ -13,7 +13,9 @@ public:
   ~Transaction();
 
 private:
-
+  char type;
+  // Book* refBook;
+  // Customer* refCustomer;
 };
 
 #endif //TRANSACTION_H

@@ -2,10 +2,8 @@
 
 ostream& operator<<(ostream &outStream, const BookStore &bookStoreToPrint)
 {
-  outStream << "Inventory: " << endl;
-  outStream << bookStoreToPrint.inventory;
-  outStream << "Customers: " << endl;
-  outStream << bookStoreToPrint.customers;
+  bookStoreToPrint.PrintInventory(outStream);
+  bookStoreToPrint.PrintCustomers(outStream);
   return outStream;
 }
 
@@ -33,14 +31,32 @@ bool BookStore::RemoveBook(Book* target, Book &removedBookPointer)
 
 bool BookStore::AddCustomer(Customer* insCustomer)
 {
-  customers.setItem(insCustomer->getLastName(), insCustomer);
+  string hash = insCustomer->getFirstName() + insCustomer->getLastName();
+  customers.setItem(hash, insCustomer);
 }
 bool BookStore::RemoveCustomer(Customer target, Customer &removedCustomer)
 {
 
 }
 
-void BookStore::ProcessTransactionData(vector<string> transactionData)
+void BookStore::ProcessTransactionData(Transaction trans)
 {
+}
 
+void BookStore::PrintInventory(ostream& outStream) const
+{
+  outStream << "Inventory: " << endl;
+  // outStream << inventory;
+}
+void BookStore::PrintCustomers(ostream& outStream) const
+{
+  outStream << "Customers: " << endl;
+  outStream << customers;
+}
+
+bool BookStore::PrintCustomerHistory(ostream& outStream, const Customer &myCustomer) const
+{
+  string hash = myCustomer.getFirstName() + myCustomer.getLastName();
+  Customer* cust = customers.getItem(hash);
+  cust->PrintHistory(outStream);
 }

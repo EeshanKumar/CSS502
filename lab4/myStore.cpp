@@ -3,10 +3,18 @@
 #include <sstream>
 #include <vector>
 #include <cstdlib>
+#include <algorithm>
 using namespace std;
 #include "BookStore.h"
 const int MAX_LINE_SIZE = 2048;
 const int MAX_TITLE = 512;
+
+
+// trim from end
+static inline string &rtrim(string &s) {
+        s.erase(find_if(s.rbegin(), s.rend(), not1(ptr_fun<int, int>(isspace))).base(), s.end());
+        return s;
+}
 
 int main(int argc, char* argv[])
 {
@@ -142,15 +150,11 @@ int main(int argc, char* argv[])
     myBookStore.AddCustomer(insCustomer);
   }
 
-  cout << myBookStore;
-
-  return 0;
-
 
   ////////////////////////////////////////
   /////READ IN + PROCESS TRANSACTIONS/////
   ////////////////////////////////////////
-  transactionFile.open(argv[1]);
+  transactionFile.open(argv[3]);
   if (!transactionFile.is_open())
   {
     cerr << "File not found" << endl;
@@ -161,16 +165,64 @@ int main(int argc, char* argv[])
   {
     stringstream ss;
     char token[MAX_TITLE];
-    vector<string> transactionData;
+    char transType;
+
     ss << line;
-    while (ss.getline(token, MAX_TITLE, ','))
+    ss.getline(token, MAX_TITLE, ',');
+    transType = token[0];
+
+
+    switch (transType)
     {
-      string str(token);
-      transactionData.push_back(str);
+      case 'I':
+      {
+        myBookStore.PrintInventory(cout);
+        break;
+      }
+      case 'H':
+      {
+        string custFirstName, custLastName;
+
+        ss.getline(token, MAX_TITLE, ',');
+        custFirstName = (string)token;
+        ss.getline(token, MAX_TITLE, ',');
+        custLastName = (string)token;
+        custLastName = rtrim(custLastName);
+        Customer myCustomer(custFirstName, custLastName);
+
+        myBookStore.PrintCustomerHistory(cout, myCustomer);
+        break;
+      }
+      case 'P':
+      {
+        // string custFirstName, custLastName;
+
+        // ss.getline(token, MAX_TITLE, ',');
+        // custFirstName = (string)token;
+        // ss.getline(token, MAX_TITLE, ',');
+        // custLastName = (string)token;
+        // custLastName = rtrim(custLastName);
+        // Customer myCustomer(custFirstName, custLastName);
+
+        // myBookStore.PrintCustomerHistory(cout, myCustomer);
+        break;
+      }
+      case 'R':
+      {
+        break;
+      }
+      case 'T':
+      {
+        break;
+      }
+      default:
+      {
+        cerr << "ERROR. Invalid Transaction Entry" << endl;
+      }
     }
-    myBookStore.ProcessTransactionData(transactionData);
   }
 
+  // cout << myBookStore;
   return 0;
 }
 
@@ -262,3 +314,4 @@ int main(int argc, char* argv[])
   // cout << *pBook << endl;
   // comic1.PrintDetails(cout);
   // book2.PrintDetails(cout);
+

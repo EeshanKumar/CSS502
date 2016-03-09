@@ -80,3 +80,13 @@ bool Customer::operator!=(Customer rhs) const
 {
   return ((firstName != rhs.firstName) || (lastName != rhs.lastName) || (age != rhs.age) || (balance != rhs.balance));
 }
+
+void Customer::PrintHistory(ostream& outStream) const
+{
+  outStream << "Customer History for ";
+  outStream << firstName << " " << lastName << endl;
+  for (int i = 0; i < history.size(); ++i)
+  {
+    outStream << history[i] << endl;
+  }
+}

@@ -29,7 +29,7 @@ private:
   };
   Node* hashMap[HASH_SIZE];
 
-  int stringToHashValue(string key);
+  int stringToHashValue(string key) const;
   void print(ostream &outStream) const;
 };
 
@@ -151,7 +151,7 @@ bool Hash<ItemType>::setItem(string key, ItemType* insItem)
 }
 
 template <class ItemType>
-int Hash<ItemType>::stringToHashValue(string key)
+int Hash<ItemType>::stringToHashValue(string key) const
 {
   int hash = 0;
 

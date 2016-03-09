@@ -31,6 +31,8 @@ public:
   bool operator==(Customer rhs) const;
   bool operator!=(Customer rhs) const;
 
+  void PrintHistory(ostream& outStream) const;
+
 private:
   string firstName;
   string lastName;

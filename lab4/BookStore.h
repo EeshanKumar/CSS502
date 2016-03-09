@@ -1,4 +1,5 @@
 #include <iostream>
+using namespace std;
 #include "Book.h"
 #include "GraphicNovel.h"
 #include "AudioBook.h"
@@ -22,7 +23,11 @@ public:
   bool AddCustomer(Customer* insCustomer);
   bool RemoveCustomer(Customer target, Customer &removedCustomer);
 
-  void ProcessTransactionData(vector<string> transactionData);
+  void ProcessTransactionData(Transaction trans);
+
+  void PrintInventory(ostream& outStream) const;
+  void PrintCustomers(ostream& outStream) const;
+  bool PrintCustomerHistory(ostream& outStream, const Customer &myCustomer) const;
 
 private:
   BST<Book> inventory;
