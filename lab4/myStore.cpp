@@ -11,10 +11,12 @@ const int MAX_TITLE = 512;
 int main(int argc, char* argv[])
 {
   BookStore myBookStore;
-  fstream myFile;
+  fstream inventoryFile;
+  fstream customerFile;
+  fstream transactionFile;
   char line[MAX_LINE_SIZE];
 
-  if (argc != 2)
+  if (argc != 4)
   {
     cerr << "Usage: " << argv[0] << " InventoryFilename CustomerFileName TransactionsFilename" << endl;
     return -1;
@@ -23,14 +25,14 @@ int main(int argc, char* argv[])
   ///////////////////////////
   /////READ IN INVENTORY/////
   ///////////////////////////
-  myFile.open(argv[1]);
-  if (!myFile.is_open())
+  inventoryFile.open(argv[1]);
+  if (!inventoryFile.is_open())
   {
-    cerr << "File not found" << endl;
+    cerr << "Inventory File not found" << endl;
     return -1;
   }
 
-  while (myFile.getline(line, MAX_LINE_SIZE))
+  while (inventoryFile.getline(line, MAX_LINE_SIZE))
   {
     stringstream ss;
     char token[MAX_TITLE];
@@ -109,64 +111,51 @@ int main(int argc, char* argv[])
     }
   }
 
-  cout << myBookStore;
-
   ///////////////////////////
   /////READ IN CUSTOMERS/////
   ///////////////////////////
-
-
-  return 0;
-
-
-  Book book1, book2, book3("Frank", "Dune");
-  GraphicNovel comic1;
-  cout << "Welcome to the Library of Congress" << endl;
-  book1.setTitle("The Dying Grass");
-  book1.setAuthor("Vollmann");
-  book1.setCost(55.00);
-
-  comic1.setTitle("Watchmen");
-  comic1.setAuthor("Moore");
-  comic1.setArtist("Gibbons");
-  comic1.setCost(22.99);
-
-  book2 = (Book)comic1;
-  book3 = comic1;
-
-  cout << comic1 << endl;
-  cout << book2 << endl;
-  cout << book3 << endl;
-
-  Book* pBook;
-  pBook = &comic1;
-
-  cout << *pBook << endl;
-  pBook = &book1;
-
-  cout << *pBook << endl;
-  // comic1.PrintDetails(cout);
-  // book2.PrintDetails(cout);
-  return 0;
-
-{
-
-  fstream myFile;
-  char line[MAX_LINE_SIZE];
-
-  if (argc != 2)
+  customerFile.open(argv[2]);
+  if (!customerFile.is_open())
   {
-    cerr << "Usage: " << argv[0] << " Filename" << endl;
+    cerr << "Customer File not found" << endl;
     return -1;
   }
-  myFile.open(argv[1]);
-  if (!myFile.is_open())
+
+  while (customerFile.getline(line, MAX_LINE_SIZE))
+  {
+    stringstream ss;
+    char token[MAX_TITLE];
+    string firstName, lastName;
+    int age;
+
+    ss << line;
+    ss.getline(token, MAX_TITLE, ',');
+    firstName = (string)token;
+    ss.getline(token, MAX_TITLE, ',');
+    lastName = (string)token;
+    ss.getline(token, MAX_TITLE, ',');
+    age = atoi(token);
+
+    Customer* insCustomer = new Customer(firstName, lastName, age);
+    myBookStore.AddCustomer(insCustomer);
+  }
+
+  cout << myBookStore;
+
+  return 0;
+
+
+  ////////////////////////////////////////
+  /////READ IN + PROCESS TRANSACTIONS/////
+  ////////////////////////////////////////
+  transactionFile.open(argv[1]);
+  if (!transactionFile.is_open())
   {
     cerr << "File not found" << endl;
     return -1;
   }
 
-  while (myFile.getline(line, MAX_LINE_SIZE))
+  while (transactionFile.getline(line, MAX_LINE_SIZE))
   {
     stringstream ss;
     char token[MAX_TITLE];
@@ -247,6 +236,36 @@ int main(int argc, char* argv[])
   // {
   //   cout << "bible <= watchmen" << endl;
   // }
+
+
+  // Book book1, book2, book3("Frank", "Dune");
+  // GraphicNovel comic1;
+  // cout << "Welcome to the Library of Congress" << endl;
+  // book1.setTitle("The Dying Grass");
+  // book1.setAuthor("Vollmann");
+  // book1.setCost(55.00);
+
+  // comic1.setTitle("Watchmen");
+  // comic1.setAuthor("Moore");
+  // comic1.setArtist("Gibbons");
+  // comic1.setCost(22.99);
+
+  // book2 = (Book)comic1;
+  // book3 = comic1;
+
+  // cout << comic1 << endl;
+  // cout << book2 << endl;
+  // cout << book3 << endl;
+
+  // Book* pBook;
+  // pBook = &comic1;
+
+  // cout << *pBook << endl;
+  // pBook = &book1;
+
+  // cout << *pBook << endl;
+  // comic1.PrintDetails(cout);
+  // book2.PrintDetails(cout);
 
   return 0;
 }

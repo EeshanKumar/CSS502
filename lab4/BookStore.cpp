@@ -2,7 +2,11 @@
 
 ostream& operator<<(ostream &outStream, const BookStore &bookStoreToPrint)
 {
+  outStream << "Inventory: " << endl;
   outStream << bookStoreToPrint.inventory;
+  outStream << "Customers: " << endl;
+  outStream << bookStoreToPrint.customers;
+  return outStream;
 }
 
 BookStore::BookStore()
@@ -25,4 +29,9 @@ bool BookStore::RemoveBook(Book* target, Book &removedBookPointer)
     return false;
   }
   return true;
+}
+
+bool BookStore::AddCustomer(Customer* insCustomer)
+{
+  customers.setItem(insCustomer->getLastName(), insCustomer);
 }
