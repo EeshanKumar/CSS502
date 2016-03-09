@@ -182,37 +182,282 @@ int main(int argc, char* argv[])
       case 'H':
       {
         string custFirstName, custLastName;
+        Customer myCustomer;
 
         ss.getline(token, MAX_TITLE, ',');
         custFirstName = (string)token;
+        myCustomer.setFirstName(custFirstName);
         ss.getline(token, MAX_TITLE, ',');
         custLastName = (string)token;
         custLastName = rtrim(custLastName);
-        Customer myCustomer(custFirstName, custLastName);
+        myCustomer.setLastName(custLastName);
 
         myBookStore.PrintCustomerHistory(cout, myCustomer);
         break;
       }
       case 'P':
       {
-        // string custFirstName, custLastName;
+        string custFirstName, custLastName;
+        Customer myCustomer;
+        char bookType, newUsedType;
+        string author, title;
 
-        // ss.getline(token, MAX_TITLE, ',');
-        // custFirstName = (string)token;
-        // ss.getline(token, MAX_TITLE, ',');
-        // custLastName = (string)token;
-        // custLastName = rtrim(custLastName);
-        // Customer myCustomer(custFirstName, custLastName);
+        ss.getline(token, MAX_TITLE, ',');
+        custFirstName = (string)token;
+        myCustomer.setFirstName(custFirstName);
+        ss.getline(token, MAX_TITLE, ',');
+        custLastName = (string)token;
+        myCustomer.setLastName(custLastName);
 
-        // myBookStore.PrintCustomerHistory(cout, myCustomer);
+        ss.getline(token, MAX_TITLE, ',');
+        bookType = token[0];
+        ss.getline(token, MAX_TITLE, ',');
+        newUsedType = token[0];
+        ss.getline(token, MAX_TITLE, ',');
+        author = (string)token;
+        ss.getline(token, MAX_TITLE, ',');
+        title = (string)token;
+        title = rtrim(title);
+
+        switch (bookType)
+        {
+          case 'B':
+          {
+            if (newUsedType != 'N')
+            {
+              ss.getline(token, MAX_TITLE, ',');
+              newUsedType = token[0];
+            }
+            string quality = string(1, newUsedType);
+
+            Book myBook(author, title);
+            myBook.setQuality(quality);
+
+            //Do Stuff with myBook
+            cout << "Purchasing " << myBook.getTitle();
+            cout << " for " << myCustomer.getFirstName() << " " << myCustomer.getLastName() << endl;
+            break;
+          }
+          case 'A':
+          {
+            string narrator;
+            ss.getline(token, MAX_TITLE, ',');
+            narrator = (string)token;
+
+            if (newUsedType != 'N')
+            {
+              ss.getline(token, MAX_TITLE, ',');
+              newUsedType = token[0];
+            }
+            string quality = string(1, newUsedType);
+
+            AudioBook myBook(author, title);
+            myBook.setNarrator(narrator);
+            myBook.setQuality(quality);
+
+            //Do Stuff with myBook
+            cout << "Purchasing " << myBook.getTitle() << " for " << myCustomer.getFirstName() << " " << myCustomer.getLastName() << endl;
+            break;
+          }
+          case 'G':
+          {
+            string artist;
+            ss.getline(token, MAX_TITLE, ',');
+            artist = (string)token;
+
+            if (newUsedType != 'N')
+            {
+              ss.getline(token, MAX_TITLE, ',');
+              newUsedType = token[0];
+            }
+            string quality = string(1, newUsedType);
+
+            GraphicNovel myBook(author, title);
+            myBook.setArtist(artist);
+            myBook.setQuality(quality);
+
+            //Do Stuff with myBook
+            cout << "Purchasing " << myBook.getTitle();
+            cout << " for " << myCustomer.getFirstName() << " " << myCustomer.getLastName() << endl;
+            break;
+          }
+          default:
+          {
+            cerr << "ERROR. Invalid Entry" << endl;
+          }
+        }
         break;
       }
       case 'R':
       {
+        string custFirstName, custLastName;
+        Customer myCustomer;
+        char bookType, newUsedType;
+        string author, title;
+
+        ss.getline(token, MAX_TITLE, ',');
+        custFirstName = (string)token;
+        myCustomer.setFirstName(custFirstName);
+        ss.getline(token, MAX_TITLE, ',');
+        custLastName = (string)token;
+        myCustomer.setLastName(custLastName);
+
+        ss.getline(token, MAX_TITLE, ',');
+        bookType = token[0];
+        ss.getline(token, MAX_TITLE, ',');
+        newUsedType = token[0];
+        ss.getline(token, MAX_TITLE, ',');
+        author = (string)token;
+        ss.getline(token, MAX_TITLE, ',');
+        title = (string)token;
+        title = rtrim(title);
+
+        switch (bookType)
+        {
+          case 'B':
+          {
+            if (newUsedType != 'N')
+            {
+              ss.getline(token, MAX_TITLE, ',');
+              newUsedType = token[0];
+            }
+            string quality = string(1, newUsedType);
+
+            Book myBook(author, title);
+            myBook.setQuality(quality);
+
+            //Do Stuff with myBook
+            cout << "Returning " << myBook.getTitle();
+            cout << " for " << myCustomer.getFirstName() << " " << myCustomer.getLastName() << endl;
+            break;
+          }
+          case 'A':
+          {
+            string narrator;
+            ss.getline(token, MAX_TITLE, ',');
+            narrator = (string)token;
+
+            if (newUsedType != 'N')
+            {
+              ss.getline(token, MAX_TITLE, ',');
+              newUsedType = token[0];
+            }
+            string quality = string(1, newUsedType);
+
+            AudioBook myBook(author, title);
+            myBook.setNarrator(narrator);
+            myBook.setQuality(quality);
+
+            //Do Stuff with myBook
+            cout << "Returning " << myBook.getTitle() << " for " << myCustomer.getFirstName() << " " << myCustomer.getLastName() << endl;
+            break;
+          }
+          case 'G':
+          {
+            string artist;
+            ss.getline(token, MAX_TITLE, ',');
+            artist = (string)token;
+
+            if (newUsedType != 'N')
+            {
+              ss.getline(token, MAX_TITLE, ',');
+              newUsedType = token[0];
+            }
+            string quality = string(1, newUsedType);
+
+            GraphicNovel myBook(author, title);
+            myBook.setArtist(artist);
+            myBook.setQuality(quality);
+
+            //Do Stuff with myBook
+            cout << "Returning " << myBook.getTitle();
+            cout << " for " << myCustomer.getFirstName() << " " << myCustomer.getLastName() << endl;
+            break;
+          }
+          default:
+          {
+            cerr << "ERROR. Invalid Entry" << endl;
+          }
+        }
         break;
       }
       case 'T':
       {
+        string custFirstName, custLastName;
+        Customer myCustomer;
+        char bookType, newUsedType;
+        string author, title;
+        float cost;
+
+        ss.getline(token, MAX_TITLE, ',');
+        custFirstName = (string)token;
+        myCustomer.setFirstName(custFirstName);
+        ss.getline(token, MAX_TITLE, ',');
+        custLastName = (string)token;
+        myCustomer.setLastName(custLastName);
+
+        ss.getline(token, MAX_TITLE, ',');
+        bookType = token[0];
+        ss.getline(token, MAX_TITLE, ',');
+        author = (string)token;
+        ss.getline(token, MAX_TITLE, ',');
+        title = (string)token;
+        ss.getline(token, MAX_TITLE, ',');
+        cost = atof(token);
+
+        switch (bookType)
+        {
+          case 'B':
+          {
+            ss.getline(token, MAX_TITLE, ',');
+            newUsedType = token[0];
+            string quality = string(1, newUsedType);
+
+            Book myBook(author, title, cost, quality);
+
+            //Do Stuff with myBook
+            cout << "Trade in " << myBook.getTitle();
+            cout << " for " << myCustomer.getFirstName() << " " << myCustomer.getLastName() << endl;
+            break;
+          }
+          case 'A':
+          {
+            string narrator;
+            ss.getline(token, MAX_TITLE, ',');
+            narrator = (string)token;
+
+            ss.getline(token, MAX_TITLE, ',');
+            newUsedType = token[0];
+            string quality = string(1, newUsedType);
+
+            AudioBook myBook(author, title, cost, narrator, quality);
+
+            //Do Stuff with myBook
+            cout << "Trade in " << myBook.getTitle() << " for " << myCustomer.getFirstName() << " " << myCustomer.getLastName() << endl;
+            break;
+          }
+          case 'G':
+          {
+            string artist;
+            ss.getline(token, MAX_TITLE, ',');
+            artist = (string)token;
+
+            ss.getline(token, MAX_TITLE, ',');
+            newUsedType = token[0];
+            string quality = string(1, newUsedType);
+
+            GraphicNovel myBook(author, title, cost, artist, quality);
+
+            //Do Stuff with myBook
+            cout << "Trade in " << myBook.getTitle();
+            cout << " for " << myCustomer.getFirstName() << " " << myCustomer.getLastName() << endl;
+            break;
+          }
+          default:
+          {
+            cerr << "ERROR. Invalid Entry" << endl;
+          }
+        }
         break;
       }
       default:
