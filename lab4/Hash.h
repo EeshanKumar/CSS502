@@ -2,7 +2,6 @@
 #include <string>
 using namespace std;
 
-const int MAX_KEY_SIZE = 512;
 const int HASH_SIZE = 211;
 
 template <class ItemType>
@@ -154,13 +153,12 @@ bool Hash<ItemType>::setItem(string key, ItemType* insItem)
 template <class ItemType>
 int Hash<ItemType>::stringToHashValue(string key)
 {
-  char charKey[MAX_KEY_SIZE];
-  strcpy(charKey, key.c_str());
   int hash = 0;
 
-  for (int i = 0; i < sizeof(charKey)/sizeof(charKey[0]); ++i)
+  for (int i = 0; i < key.length(); ++i)
   {
-    hash += charKey[i];
+    hash += (int)key.at(i);
   }
+
   return hash % HASH_SIZE;
 }
