@@ -84,7 +84,8 @@ int main(int argc, char* argv[])
         string quality = string(1, newUsedType);
 
         AudioBook* insABook = new AudioBook(author, title, cost, narrator, quality);
-        myBookStore.AddBook(insABook, copies);
+        Book* insBook = insABook;
+        myBookStore.AddBook(insBook, copies);
         break;
       }
       case 'G':
@@ -101,7 +102,8 @@ int main(int argc, char* argv[])
         string quality = string(1, newUsedType);
 
         GraphicNovel* insGNBook = new GraphicNovel(author, title, cost, artist, quality);
-        myBookStore.AddBook(insGNBook, copies);
+        Book* insBook = insGNBook;
+        myBookStore.AddBook(insBook, copies);
         break;
       }
       default:

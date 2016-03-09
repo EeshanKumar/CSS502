@@ -3,6 +3,7 @@
 using namespace std;
 
 const int MAX_KEY_SIZE = 512;
+const int HASH_SIZE = 211;
 
 template <class ItemType>
 class Hash
@@ -27,7 +28,7 @@ private:
     ItemType* item;
     Node* next;
   };
-  Node* hashMap[211];
+  Node* hashMap[HASH_SIZE];
 
   int stringToHashValue(string key);
   void print(ostream &outStream) const;
@@ -84,8 +85,8 @@ void Hash<ItemType>::Clear()
       {
         Node* delNode = pNode;
         pNode = pNode->next;
-        delete delNode;
         delete delNode->item;
+        delete delNode;
       }
     }
   }
@@ -125,7 +126,9 @@ bool Hash<ItemType>::setItem(string key, ItemType* insItem)
   }
   if (pNode->key == key)
   {
+    ItemType* delItem = pNode->item;
     pNode->item = insItem;
+    delete delItem;
     return true;
   }
   while (pNode->next != NULL)
@@ -133,7 +136,9 @@ bool Hash<ItemType>::setItem(string key, ItemType* insItem)
     //Overwrite existing hash value
     if ((pNode->next)->key == key)
     {
+      ItemType* delItem = pNode->item;
       pNode->item = insItem;
+      delete delItem;
       return true;
     }
     pNode = pNode->next;
@@ -157,6 +162,5 @@ int Hash<ItemType>::stringToHashValue(string key)
   {
     hash += charKey[i];
   }
-
-  return hash % sizeof(hashMap)/sizeof(hashMap[0]);
+  return hash % HASH_SIZE;
 }

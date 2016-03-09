@@ -1,1 +1,1 @@
-g++ --std=c++11 myStore.cpp Book.cpp GraphicNovel.cpp AudioBook.cpp Customer.cpp BookStore.cpp
+g++ --std=c++11 myStore.cpp Book.cpp GraphicNovel.cpp AudioBook.cpp Customer.cpp BookStore.cpp Transaction.cpp

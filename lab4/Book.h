@@ -17,7 +17,7 @@ public:
   Book(string author, string title);
   Book(string author, string title, float cost);
   Book(string author, string title, float cost, string quality);
-  ~Book();
+  virtual ~Book();
 
   string getAuthor() const;
   string getTitle() const;

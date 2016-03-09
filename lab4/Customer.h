@@ -1,7 +1,7 @@
 #include <iostream>
 #include <vector>
 using namespace std;
-// #include "Transactions.h"
+#include "Transaction.h"
 
 #ifndef CUSTOMER_H
 #define CUSTOMER_H
@@ -36,7 +36,7 @@ private:
   string lastName;
   int age;
   int balance = 0;
-  // vector<transactions> history;
+  vector<Transaction> history;
 };
 
 #endif //CUSTOMER_H
