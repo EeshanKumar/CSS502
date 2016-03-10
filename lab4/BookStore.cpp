@@ -18,6 +18,21 @@ BookStore::~BookStore()
 {
 }
 
+float BookStore::getBalance() const
+{
+  return balance;
+}
+bool BookStore::setBalance(float balance)
+{
+  this->balance = balance;
+  return true;
+}
+Customer* BookStore::getCustomer(const Customer &myCustomer) const
+{
+  string hash = myCustomer.getFirstName() + myCustomer.getLastName();
+  return customers.getItem(hash);
+}
+
 bool BookStore::AddBook(Book* insBook, int copies)
 {
   inventory.Insert(insBook, copies);
@@ -78,10 +93,4 @@ void BookStore::PrintCustomers() const
 bool BookStore::PrintCustomerHistory(const Customer &myCustomer) const
 {
   getCustomer(myCustomer)->PrintHistory(*outStream);
-}
-
-Customer* BookStore::getCustomer(const Customer &myCustomer) const
-{
-  string hash = myCustomer.getFirstName() + myCustomer.getLastName();
-  return customers.getItem(hash);
 }

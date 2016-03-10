@@ -19,6 +19,8 @@ public:
   BookStore(ostream* outStream);
   ~BookStore();
 
+  float getBalance() const;
+  bool setBalance(float balance);
   Customer* getCustomer(const Customer &myCustomer) const;
 
   bool AddBook(Book* insBook, int copies);

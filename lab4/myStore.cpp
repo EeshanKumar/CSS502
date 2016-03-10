@@ -473,7 +473,7 @@ int main(int argc, char* argv[])
     }
   }
 
-  // cout << myBookStore;
+  cout << myBookStore.getBalance();
   return 0;
 }
 
