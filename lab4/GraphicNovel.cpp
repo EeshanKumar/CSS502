@@ -8,11 +8,7 @@ ostream& operator<<(ostream &outStream, const GraphicNovel &graphicNovelToPrint)
 
 void GraphicNovel::print(ostream& outStream) const
 {
-  outStream << "Author: " << author << endl;
-  outStream << "Title: " << title << endl;
-  outStream << "Artist: " << artist << endl;
-  outStream << "Cost: $" << cost << endl;
-  outStream << "Quality: " << quality << endl;
+  outStream << "(" << quality << ") $" << cost << ": " << title << " by " << author << " with art by " << artist << endl;
 }
 
 GraphicNovel::GraphicNovel()

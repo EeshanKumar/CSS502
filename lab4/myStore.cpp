@@ -18,7 +18,7 @@ static inline string &rtrim(string &s) {
 
 int main(int argc, char* argv[])
 {
-  BookStore myBookStore;
+  BookStore myBookStore(&cout);
   fstream inventoryFile;
   fstream customerFile;
   fstream transactionFile;
@@ -176,7 +176,7 @@ int main(int argc, char* argv[])
     {
       case 'I':
       {
-        myBookStore.PrintInventory(cout);
+        myBookStore.PrintInventory();
         break;
       }
       case 'H':
@@ -192,7 +192,7 @@ int main(int argc, char* argv[])
         custLastName = rtrim(custLastName);
         myCustomer.setLastName(custLastName);
 
-        myBookStore.PrintCustomerHistory(cout, myCustomer);
+        myBookStore.PrintCustomerHistory(myCustomer);
         break;
       }
       case 'P':
@@ -236,6 +236,8 @@ int main(int argc, char* argv[])
             //Do Stuff with myBook
             cout << "Purchasing " << myBook.getTitle();
             cout << " for " << myCustomer.getFirstName() << " " << myCustomer.getLastName() << endl;
+
+            myBookStore.ProcessPurchase(myCustomer, &myBook);
             break;
           }
           case 'A':
@@ -257,6 +259,8 @@ int main(int argc, char* argv[])
 
             //Do Stuff with myBook
             cout << "Purchasing " << myBook.getTitle() << " for " << myCustomer.getFirstName() << " " << myCustomer.getLastName() << endl;
+
+            myBookStore.ProcessPurchase(myCustomer, &myBook);
             break;
           }
           case 'G':
@@ -279,6 +283,8 @@ int main(int argc, char* argv[])
             //Do Stuff with myBook
             cout << "Purchasing " << myBook.getTitle();
             cout << " for " << myCustomer.getFirstName() << " " << myCustomer.getLastName() << endl;
+
+            myBookStore.ProcessPurchase(myCustomer, &myBook);
             break;
           }
           default:

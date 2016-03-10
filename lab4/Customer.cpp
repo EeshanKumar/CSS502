@@ -23,12 +23,12 @@ Customer::Customer(string firstName, string lastName, int age)
   this->lastName = lastName;
   this->age = age;
 }
-Customer::Customer(string firstName, string lastName, int age, int balance)
+Customer::Customer(string firstName, string lastName, int age, int amtSpent)
 {
   this->firstName = firstName;
   this->lastName = lastName;
   this->age = age;
-  this->balance = balance;
+  this->amtSpent = amtSpent;
 }
 Customer::~Customer()
 {
@@ -46,9 +46,9 @@ int Customer::getAge() const
 {
   return age;
 }
-int Customer::getBalance() const
+int Customer::getAmtSpent() const
 {
-  return balance;
+  return amtSpent;
 }
 
 bool Customer::setFirstName(string firstName)
@@ -66,19 +66,25 @@ bool Customer::setAge(int age)
   this->age = age;
   return true;
 }
-bool Customer::setBalance(int balance)
+bool Customer::setAmtSpent(int amtSpent)
 {
-  this->balance = balance;
+  this->amtSpent = amtSpent;
   return true;
 }
 
 bool Customer::operator==(Customer rhs) const
 {
-  return ((firstName == rhs.firstName) && (lastName == rhs.lastName) && (age == rhs.age) && (balance == rhs.balance));
+  return ((firstName == rhs.firstName) && (lastName == rhs.lastName) && (age == rhs.age) && (amtSpent == rhs.amtSpent));
 }
 bool Customer::operator!=(Customer rhs) const
 {
-  return ((firstName != rhs.firstName) || (lastName != rhs.lastName) || (age != rhs.age) || (balance != rhs.balance));
+  return ((firstName != rhs.firstName) || (lastName != rhs.lastName) || (age != rhs.age) || (amtSpent != rhs.amtSpent));
+}
+
+bool Customer::incrementAmtSpent(float amount)
+{
+  amtSpent += amount;
+  return true;
 }
 
 void Customer::PrintHistory(ostream& outStream) const

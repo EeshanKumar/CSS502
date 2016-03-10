@@ -8,10 +8,7 @@ ostream& operator<<(ostream &outStream, const Book &bookToPrint)
 
 void Book::print(ostream& outStream) const
 {
-  outStream << "Author: " << author << endl;
-  outStream << "Title: " << title << endl;
-  outStream << "Cost: $" << cost << endl;
-  outStream << "Quality: " << quality << endl;
+  outStream << "(" << quality << ") $" << cost << ": " << title << " by " << author << endl;
 }
 
 Book::Book()

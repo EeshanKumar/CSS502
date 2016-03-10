@@ -8,11 +8,7 @@ ostream& operator<<(ostream &outStream, const AudioBook &audioBookToPrint)
 
 void AudioBook::print(ostream& outStream) const
 {
-  outStream << "Author: " << author << endl;
-  outStream << "Title: " << title << endl;
-  outStream << "Narrator: " << narrator << endl;
-  outStream << "Cost: $" << cost << endl;
-  outStream << "Quality: " << quality << endl;
+  outStream << "(" << quality << ") $" << cost << ": " << title << " by " << author << " and narrated by " << narrator << endl;
 }
 
 AudioBook::AudioBook()

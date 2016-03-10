@@ -22,7 +22,7 @@ public:
 
 //Public Functions
   int Insert(ItemType *item, int count);
-  int RemoveOrDecrement(ItemType target, ItemType &result);
+  int RemoveOrDecrement(ItemType target, ItemType* &resultPtr);
   int Count(ItemType targetItem) const;
   int Height() const;
   void ClearTree();
@@ -53,7 +53,7 @@ private:
   void case5(Node* subTree);
   void rotateOnParent(Node* subTree, bool left);
 
-  int findAndDecrement(Node* &subTree, ItemType target, ItemType &result);
+  int findAndDecrement(Node* &subTree, ItemType target, ItemType* &resultPtr);
 
   int findAndReturnCount(Node * subTree, const ItemType &item) const;
   void deleteSubTree(Node * &subTree);
@@ -87,13 +87,13 @@ int BST<ItemType>::Insert( ItemType *item, int count )
 }
 
 template <class ItemType>
-int BST<ItemType>::RemoveOrDecrement(ItemType target, ItemType &result)
+int BST<ItemType>::RemoveOrDecrement(ItemType target, ItemType* &resultPtr)
 {
-  return findAndDecrement(this->root, target, result);
+  return findAndDecrement(this->root, target, resultPtr);
 }
 
 template <class ItemType>
-int BST<ItemType>::findAndDecrement(Node* &subTree, ItemType target, ItemType &result)
+int BST<ItemType>::findAndDecrement(Node* &subTree, ItemType target, ItemType* &resultPtr)
 {
   if (subTree == NULL)
   {
@@ -103,8 +103,8 @@ int BST<ItemType>::findAndDecrement(Node* &subTree, ItemType target, ItemType &r
   {
     if (subTree->count > 0)
     {
-      subTree->count--;
-      result = *(subTree->item);
+      --subTree->count;
+      resultPtr = subTree->item;
       return subTree->count;
     }
     else
@@ -114,11 +114,11 @@ int BST<ItemType>::findAndDecrement(Node* &subTree, ItemType target, ItemType &r
   }
   if (*(subTree->item) > target)
   {
-    return findAndDecrement(subTree->left, target, result);
+    return findAndDecrement(subTree->left, target, resultPtr);
   }
   else
   {
-    return findAndDecrement(subTree->right, target, result);
+    return findAndDecrement(subTree->right, target, resultPtr);
   }
 }
 
@@ -439,7 +439,7 @@ ostream& BST<ItemType>::print(ostream &outStream, Node* subTree) const
 
   print(outStream, subTree->left);
   outStream << *printItem;
-  outStream << "Count: " << subTree->count << endl << endl;
+  outStream << "Count: " << subTree->count << endl;
   print(outStream, subTree->right);
   return outStream;
 }
