@@ -8,7 +8,7 @@ ostream& operator<<(ostream &outStream, const Book &bookToPrint)
 
 void Book::print(ostream& outStream) const
 {
-  outStream << "(" << quality << ") $" << cost << ": " << title << " by " << author << endl;
+  outStream << type << ": " << title << " by " << author << " (" << mapQuality(quality) << ") $" << cost << endl;
 }
 
 Book::Book()
@@ -17,6 +17,7 @@ Book::Book()
   title = "";
   cost = 0;
   quality = New;
+  type = "Book";
 }
 Book::Book(string author)
 {
@@ -24,6 +25,7 @@ Book::Book(string author)
   title = "";
   cost = 0;
   quality = New;
+  type = "Book";
 }
 Book::Book(string author, string title)
 {
@@ -31,6 +33,7 @@ Book::Book(string author, string title)
   this->title = title;
   cost = 0;
   quality = New;
+  type = "Book";
 }
 Book::Book(string author, string title, float cost)
 {
@@ -38,6 +41,7 @@ Book::Book(string author, string title, float cost)
   this->title = title;
   this->cost = cost;
   quality = New;
+  type = "Book";
 }
 Book::Book(string author, string title, float cost, string quality)
 {
@@ -45,6 +49,7 @@ Book::Book(string author, string title, float cost, string quality)
   this->title = title;
   this->cost = cost;
   this->setQuality(quality);
+  type = "Book";
 }
 Book::~Book()
 {
@@ -62,9 +67,13 @@ float Book::getCost() const
 {
   return cost;
 }
-int Book::getQuality() const
+string Book::getQuality() const
 {
-  return quality;
+  return mapQuality(quality);
+}
+string Book::getType() const
+{
+  return type;
 }
 
 bool Book::setAuthor(string author)
@@ -102,14 +111,23 @@ bool Book::setQuality(string quality)
   }
   return true;
 }
+bool Book::setType(string type)
+{
+  this->type = type;
+  return true;
+}
 
 bool Book::operator<(Book rBook) const
 {
-  if (this->title == rBook.title)
+  if (this->type == rBook.type)
   {
-    return this->quality < rBook.quality;
+    if (this->title == rBook.title)
+    {
+      return this->quality < rBook.quality;
+    }
+    return this->title < rBook.title;
   }
-  return this->title < rBook.title;
+  return this->type < rBook.type;
 }
 bool Book::operator<=(Book rBook) const
 {
@@ -121,11 +139,15 @@ bool Book::operator<=(Book rBook) const
 }
 bool Book::operator>(Book rBook) const
 {
-  if (this->title == rBook.title)
+  if (this->type == rBook.type)
   {
-    return this->quality > rBook.quality;
+    if (this->title == rBook.title)
+    {
+      return this->quality > rBook.quality;
+    }
+    return this->title > rBook.title;
   }
-  return this->title > rBook.title;
+  return this->type > rBook.type;
 }
 bool Book::operator>=(Book rBook) const
 {
@@ -137,9 +159,26 @@ bool Book::operator>=(Book rBook) const
 }
 bool Book::operator==(Book rBook) const
 {
-  return (this->title == rBook.title) && (this->quality == rBook.quality);
+  return (this->title == rBook.title) && (this->quality == rBook.quality) && (this->type == rBook.type);
 }
 bool Book::operator!=(Book rBook) const
 {
-  return (this->title != rBook.title) || (this->quality != rBook.quality);
+  return (this->title != rBook.title) || (this->quality != rBook.quality) || (this->type != rBook.type);
+}
+
+string Book::mapQuality(Quality quality) const
+{
+  switch (quality)
+  {
+    case 0:
+      return "New";
+    case 1:
+      return "Excellent";
+    case 2:
+      return "Good";
+    case 3:
+      return "Fair";
+    default:
+      return "Error";
+  }
 }

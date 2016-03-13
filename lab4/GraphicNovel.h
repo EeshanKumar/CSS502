@@ -15,6 +15,7 @@ public:
   GraphicNovel(string author, string title, float cost);
   GraphicNovel(string author, string title, float cost, string artist);
   GraphicNovel(string author, string title, float cost, string artist, string quality);
+  ~GraphicNovel();
 
   string getArtist() const;
 

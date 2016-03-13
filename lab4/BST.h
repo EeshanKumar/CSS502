@@ -438,8 +438,10 @@ ostream& BST<ItemType>::print(ostream &outStream, Node* subTree) const
   ItemType *printItem = subTree->item;
 
   print(outStream, subTree->left);
-  outStream << *printItem;
-  outStream << "Count: " << subTree->count << endl;
+  if (subTree->count > 0) {
+    outStream << *printItem;
+    outStream << "Count: " << subTree->count << endl;
+  }
   print(outStream, subTree->right);
   return outStream;
 }

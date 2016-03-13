@@ -12,6 +12,8 @@ public:
   Transaction();
   ~Transaction();
 
+  // virtual void Print(ostream &outStream) const;
+
 private:
   char type;
   // Book* refBook;

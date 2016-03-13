@@ -14,6 +14,7 @@ public:
   AudioBook(string author, string title, float cost);
   AudioBook(string author, string title, float cost, string narrator);
   AudioBook(string author, string title, float cost, string narrator, string quality);
+  ~AudioBook();
 
   string getNarrator() const;
 

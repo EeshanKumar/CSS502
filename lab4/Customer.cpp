@@ -23,7 +23,7 @@ Customer::Customer(string firstName, string lastName, int age)
   this->lastName = lastName;
   this->age = age;
 }
-Customer::Customer(string firstName, string lastName, int age, int amtSpent)
+Customer::Customer(string firstName, string lastName, int age, float amtSpent)
 {
   this->firstName = firstName;
   this->lastName = lastName;
@@ -46,7 +46,7 @@ int Customer::getAge() const
 {
   return age;
 }
-int Customer::getAmtSpent() const
+float Customer::getAmtSpent() const
 {
   return amtSpent;
 }
@@ -66,7 +66,7 @@ bool Customer::setAge(int age)
   this->age = age;
   return true;
 }
-bool Customer::setAmtSpent(int amtSpent)
+bool Customer::setAmtSpent(float amtSpent)
 {
   this->amtSpent = amtSpent;
   return true;
@@ -81,10 +81,10 @@ bool Customer::operator!=(Customer rhs) const
   return ((firstName != rhs.firstName) || (lastName != rhs.lastName) || (age != rhs.age) || (amtSpent != rhs.amtSpent));
 }
 
-bool Customer::incrementAmtSpent(float amount)
+float Customer::incrementAndReturnAmtSpent(float amount)
 {
   amtSpent += amount;
-  return true;
+  return amtSpent;
 }
 
 void Customer::PrintHistory(ostream& outStream) const
@@ -95,4 +95,9 @@ void Customer::PrintHistory(ostream& outStream) const
   {
     outStream << history[i] << endl;
   }
+}
+
+float Customer::applyDiscount(float cost) const
+{
+  return cost;
 }

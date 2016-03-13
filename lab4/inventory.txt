@@ -1,5 +1,6 @@
 B,N,6,William Vollmann,The Dying Grass,35.99
 B,N,8,William Faulkner,Sound and Fury,19.33
+A,N,6,William Vollmann,The Dying Grass,45.99,Edward Hermann
 G,U,1,Harvey Pekar,American Splendor 4,10.23,Crumb,G
 A,U,2,J.K. Rowling,Harry Potter and the Chamber of Secrets,45.45,Jim Dale,G
 B,N,5,Frank Carrano,Data Abstraction and Problem Solving,120.00

@@ -2,7 +2,7 @@
 
 ostream& operator<<(ostream &outStream, Transaction transToPrint)
 {
-  outStream << "Printed Transaction Here" << endl;
+  // Print(outStream);
   return outStream;
 }
 
@@ -12,3 +12,8 @@ Transaction::Transaction()
 Transaction::~Transaction()
 {
 }
+
+// void Transaction::Print(ostream &outStream) const
+// {
+//   outStream << "Printed Transaction Here" << endl;
+// }

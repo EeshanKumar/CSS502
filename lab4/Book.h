@@ -22,12 +22,14 @@ public:
   string getAuthor() const;
   string getTitle() const;
   float getCost() const;
-  int getQuality() const;
+  string getQuality() const;
+  string getType() const;
 
   bool setAuthor(string author);
   bool setTitle(string title);
   bool setCost(float cost);
   bool setQuality(string quality);
+  bool setType(string type);
 
   bool operator<(Book rBook) const;
   bool operator<=(Book rBook) const;
@@ -43,6 +45,9 @@ protected:
   string author;
   float cost;
   Quality quality;
+  string type;
+
+  string mapQuality(Quality quality) const;
 };
 
 #endif //BOOK_H
