@@ -28,13 +28,13 @@ public:
   bool setAge(int age);
   bool setAmtSpent(float amtSpent);
 
-  bool addTransactionToHistory(Transaction* trans);
-
   bool operator==(Customer rhs) const;
   bool operator!=(Customer rhs) const;
 
-  float incrementAndReturnAmtSpent(float amount);
+  float IncrementAndReturnAmtSpent(float amount);
+  float ReturnCostOfPurchasedBook(Book* returnedBook);
 
+  bool AddTransactionToHistory(Transaction* trans);
   void PrintHistory(ostream& outStream) const;
 
   virtual float applyDiscount(float cost) const;

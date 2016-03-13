@@ -76,7 +76,7 @@ bool Customer::setAmtSpent(float amtSpent)
   return true;
 }
 
-bool Customer::addTransactionToHistory(Transaction* trans)
+bool Customer::AddTransactionToHistory(Transaction* trans)
 {
   history.push_back(trans);
 }
@@ -90,10 +90,22 @@ bool Customer::operator!=(Customer rhs) const
   return ((firstName != rhs.firstName) || (lastName != rhs.lastName) || (age != rhs.age) || (amtSpent != rhs.amtSpent));
 }
 
-float Customer::incrementAndReturnAmtSpent(float amount)
+float Customer::IncrementAndReturnAmtSpent(float amount)
 {
   amtSpent += amount;
   return amtSpent;
+}
+
+float Customer::ReturnCostOfPurchasedBook(Book* returnedBook)
+{
+  for (int i = 0; i < history.size(); ++i)
+  {
+    if (*(history[i]->getBook()) == *returnedBook)
+    {
+      return history[i]->getTransAmount();
+    }
+  }
+  return -1;
 }
 
 void Customer::PrintHistory(ostream& outStream) const

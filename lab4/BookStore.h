@@ -34,6 +34,7 @@ public:
   bool RemoveCustomer(Customer target, Customer &removedCustomer);
 
   bool ProcessPurchase(Customer myCustomer, Book* myBook);
+  bool ProcessReturn(Customer myCustomer, Book* myBook);
 
   void PrintInventory() const;
   void PrintCustomers() const;
