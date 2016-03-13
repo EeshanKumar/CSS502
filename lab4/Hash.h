@@ -17,6 +17,7 @@ public:
 
   ItemType* getItem(string key) const;
   bool setItem(string key, ItemType* insItem);
+  bool removeItem(string key, ItemType* &removedItem);
 
   void Clear();
 
@@ -89,6 +90,38 @@ void Hash<ItemType>::Clear()
       }
     }
   }
+}
+
+template <class ItemType>
+bool Hash<ItemType>::removeItem(string key, ItemType* &removedItem)
+{
+  int mapValue = stringToHashValue(key);
+
+  Node* pNode = hashMap[mapValue];
+  if (pNode == NULL)
+  {
+    return false;
+  }
+  if (pNode->key == key)
+  {
+    hashMap[mapValue] = pNode->next;
+    removedItem = pNode->item;
+    delete pNode;
+    return true;
+  }
+  while (pNode->next != NULL)
+  {
+    if ((pNode->next)->key == key)
+    {
+      Node* delNode = pNode->next;
+      pNode->next = delNode->next;
+      removedItem = delNode->item;
+      delete delNode;
+      return true;
+    }
+    pNode = pNode->next;
+  }
+  return false;
 }
 
 template <class ItemType>

@@ -5,6 +5,7 @@ using namespace std;
 #include "AudioBook.h"
 #include "BST.h"
 #include "Customer.h"
+#include "SeniorCustomer.h"
 #include "Hash.h"
 #include "Transaction.h"
 #include "PurchaseTransaction.h"
@@ -31,10 +32,11 @@ public:
   bool RemoveBook(Book* target, Book &removedBookPointer);
 
   bool AddCustomer(Customer* insCustomer);
-  bool RemoveCustomer(Customer target, Customer &removedCustomer);
+  bool RemoveCustomer(Customer target);
 
   bool ProcessPurchase(Customer myCustomer, Book* myBook);
-  bool ProcessReturn(Customer myCustomer, Book* myBook);
+  bool ProcessReturn(Customer myCustomer, Book* myBook, Book* copiedBook);
+  bool ProcessTradeIn(Customer myCustomer, Book* myBook, Book* copiedBook);
 
   void PrintInventory() const;
   void PrintCustomers() const;

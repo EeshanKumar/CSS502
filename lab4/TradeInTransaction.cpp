@@ -19,7 +19,7 @@ TradeInTransaction::~TradeInTransaction()
 
 void TradeInTransaction::Print(ostream &outStream) const
 {
-  outStream << "Printed Trade In Transaction Here" << endl;
+  outStream << transType << " Transaction: Trade In " << refBook->getTitle() << " for $" << transAmt << endl;
 }
 
 ostream& operator<<(ostream &outStream, TradeInTransaction transToPrint)
