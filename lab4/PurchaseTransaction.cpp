@@ -19,7 +19,12 @@ PurchaseTransaction::~PurchaseTransaction()
 
 void PurchaseTransaction::Print(ostream &outStream) const
 {
-  outStream << transType << " Transaction: Bought " << refBook->getTitle() << " for $" << transAmt << endl;
+  if (transAmt == refBook->getCost())
+  {
+    outStream << transType << " Transaction: Bought " << refBook->getTitle() << " for $" << transAmt << endl;
+    return;
+  }
+  outStream << transType << " Transaction: Bought " << refBook->getTitle() << " for $" << transAmt << " discounted from $" << refBook->getCost() << endl;
 }
 
 ostream& operator<<(ostream &outStream, PurchaseTransaction transToPrint)

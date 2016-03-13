@@ -24,7 +24,7 @@ SeniorCustomer::~SeniorCustomer()
 {
 }
 
-float SeniorCustomer::applyDiscount(float cost) const
+float SeniorCustomer::applyDiscount(float cost, string type) const
 {
   return cost * 0.85;
 }

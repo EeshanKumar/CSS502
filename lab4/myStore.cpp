@@ -18,7 +18,7 @@ static inline string &rtrim(string &s) {
 
 int main(int argc, char* argv[])
 {
-  BookStore myBookStore(&cout);
+  BookStore myBookStore(&cout, &cerr);
   fstream inventoryFile;
   fstream customerFile;
   fstream transactionFile;

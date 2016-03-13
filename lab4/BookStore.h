@@ -22,14 +22,21 @@ friend ostream& operator<<(ostream &outStream, const BookStore &bookStoreToPrint
 public:
   BookStore();
   BookStore(ostream* outStream);
+  BookStore(ostream* outStream, ostream* errStream);
   ~BookStore();
 
   float getBalance() const;
+  ostream* getOutStream() const;
+  ostream* getErrStream() const;
+
   bool setBalance(float balance);
+  bool setOutStream(ostream* outStream);
+  bool setErrStream(ostream* errStream);
+
   Customer* getCustomer(const Customer &myCustomer) const;
 
   bool AddBook(Book* insBook, int copies);
-  bool RemoveBook(Book* target, Book &removedBookPointer);
+  bool RemoveBook(Book* target);
 
   bool AddCustomer(Customer* insCustomer);
   bool RemoveCustomer(Customer target);
@@ -47,6 +54,7 @@ private:
   Hash<Customer> customers;
   float balance = 0;
   ostream* outStream;
+  ostream* errStream;
 };
 
 #endif //BOOKSTORE_H

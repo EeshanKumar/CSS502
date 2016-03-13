@@ -39,7 +39,7 @@ public:
   bool AddTransactionToHistory(Transaction* trans);
   void PrintHistory(ostream& outStream) const;
 
-  virtual float applyDiscount(float cost) const;
+  virtual float applyDiscount(float cost, string type) const;
 
 protected:
   string firstName;

@@ -19,7 +19,12 @@ ReturnTransaction::~ReturnTransaction()
 
 void ReturnTransaction::Print(ostream &outStream) const
 {
-  outStream << transType << " Transaction: Returned " << refBook->getTitle() << " for $" << transAmt << endl;
+  if (transAmt == refBook->getCost())
+  {
+    outStream << transType << " Transaction: Returned " << refBook->getTitle() << " for $" << transAmt << endl;
+    return;
+  }
+  outStream << transType << " Transaction: Returned " << refBook->getTitle() << " for $" << transAmt << " discounted from $" << refBook->getCost() << endl;
 }
 
 ostream& operator<<(ostream &outStream, ReturnTransaction transToPrint)

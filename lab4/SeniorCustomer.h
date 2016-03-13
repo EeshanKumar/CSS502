@@ -13,7 +13,7 @@ public:
   SeniorCustomer(string firstName, string lastName, int age, float amtSpent);
   ~SeniorCustomer();
 
-  float applyDiscount(float cost) const;
+  float applyDiscount(float cost, string type) const;
 };
 
 #endif //SENIORCUSTOMER_H

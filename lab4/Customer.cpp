@@ -133,9 +133,9 @@ void Customer::PrintHistory(ostream& outStream) const
   outStream << endl;
 }
 
-float Customer::applyDiscount(float cost) const
+float Customer::applyDiscount(float cost, string type) const
 {
-  if (status == "gold")
+  if (status == "gold" && type != "AudioBook")
   {
     return cost * 0.9;
   }
