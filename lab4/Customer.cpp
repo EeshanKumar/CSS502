@@ -32,6 +32,10 @@ Customer::Customer(string firstName, string lastName, int age, float amtSpent)
 }
 Customer::~Customer()
 {
+  for (int i = 0; i < history.size(); ++i)
+  {
+     delete history[i];
+  }
 }
 
 string Customer::getFirstName() const
@@ -72,6 +76,11 @@ bool Customer::setAmtSpent(float amtSpent)
   return true;
 }
 
+bool Customer::addTransactionToHistory(Transaction* trans)
+{
+  history.push_back(trans);
+}
+
 bool Customer::operator==(Customer rhs) const
 {
   return ((firstName == rhs.firstName) && (lastName == rhs.lastName) && (age == rhs.age) && (amtSpent == rhs.amtSpent));
@@ -93,8 +102,9 @@ void Customer::PrintHistory(ostream& outStream) const
   outStream << firstName << " " << lastName << endl;
   for (int i = 0; i < history.size(); ++i)
   {
-    outStream << history[i] << endl;
+    outStream << history[i];
   }
+  outStream << endl;
 }
 
 float Customer::applyDiscount(float cost) const

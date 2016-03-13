@@ -28,6 +28,8 @@ public:
   bool setAge(int age);
   bool setAmtSpent(float amtSpent);
 
+  bool addTransactionToHistory(Transaction* trans);
+
   bool operator==(Customer rhs) const;
   bool operator!=(Customer rhs) const;
 
@@ -37,12 +39,12 @@ public:
 
   virtual float applyDiscount(float cost) const;
 
-private:
+protected:
   string firstName;
   string lastName;
   int age;
   float amtSpent = 0; //Can be negative (Customer has traded in more than they have purchsed)
-  vector<Transaction> history;
+  vector<Transaction*> history;
 };
 
 #endif //CUSTOMER_H

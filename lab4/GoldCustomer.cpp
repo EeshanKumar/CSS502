@@ -17,6 +17,10 @@ GoldCustomer::GoldCustomer(string firstName, string lastName, int age, float amt
 }
 GoldCustomer::~GoldCustomer()
 {
+  for (int i = 0; i < history.size(); ++i)
+  {
+     delete history[i];
+  }
 }
 
 float GoldCustomer::applyDiscount(float cost) const

@@ -17,6 +17,10 @@ SeniorCustomer::SeniorCustomer(string firstName, string lastName, int age, float
 }
 SeniorCustomer::~SeniorCustomer()
 {
+  for (int i = 0; i < history.size(); ++i)
+  {
+     delete history[i];
+  }
 }
 
 float SeniorCustomer::applyDiscount(float cost) const

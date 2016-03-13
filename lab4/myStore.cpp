@@ -230,14 +230,11 @@ int main(int argc, char* argv[])
             }
             string quality = string(1, newUsedType);
 
-            Book myBook(author, title);
-            myBook.setQuality(quality);
+            Book* myBook = new Book(author, title);
+            myBook->setQuality(quality);
 
             //Do Stuff with myBook
-            cout << "Purchasing " << myBook.getTitle();
-            cout << " for " << myCustomer.getFirstName() << " " << myCustomer.getLastName() << endl;
-
-            myBookStore.ProcessPurchase(myCustomer, &myBook);
+            myBookStore.ProcessPurchase(myCustomer, myBook);
             break;
           }
           case 'A':
@@ -253,14 +250,14 @@ int main(int argc, char* argv[])
             }
             string quality = string(1, newUsedType);
 
-            AudioBook myBook(author, title);
-            myBook.setNarrator(narrator);
-            myBook.setQuality(quality);
+            AudioBook* myAudioBook = new AudioBook(author, title);
+            myAudioBook->setNarrator(narrator);
+            myAudioBook->setQuality(quality);
+
+            Book* myBook = myAudioBook;
 
             //Do Stuff with myBook
-            cout << "Purchasing " << myBook.getTitle() << " for " << myCustomer.getFirstName() << " " << myCustomer.getLastName() << endl;
-
-            myBookStore.ProcessPurchase(myCustomer, &myBook);
+            myBookStore.ProcessPurchase(myCustomer, myBook);
             break;
           }
           case 'G':
@@ -276,15 +273,14 @@ int main(int argc, char* argv[])
             }
             string quality = string(1, newUsedType);
 
-            GraphicNovel myBook(author, title);
-            myBook.setArtist(artist);
-            myBook.setQuality(quality);
+            GraphicNovel* myGraphicNovel = new GraphicNovel(author, title);
+            myGraphicNovel->setArtist(artist);
+            myGraphicNovel->setQuality(quality);
+
+            Book* myBook = myGraphicNovel;
 
             //Do Stuff with myBook
-            cout << "Purchasing " << myBook.getTitle();
-            cout << " for " << myCustomer.getFirstName() << " " << myCustomer.getLastName() << endl;
-
-            myBookStore.ProcessPurchase(myCustomer, &myBook);
+            myBookStore.ProcessPurchase(myCustomer, myBook);
             break;
           }
           default:

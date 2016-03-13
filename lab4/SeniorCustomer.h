@@ -5,6 +5,7 @@
 
 class SeniorCustomer: public Customer
 {
+public:
   SeniorCustomer();
   SeniorCustomer(string firstName);
   SeniorCustomer(string firstName, string lastName);

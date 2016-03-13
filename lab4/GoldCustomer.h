@@ -5,6 +5,7 @@
 
 class GoldCustomer: public Customer
 {
+public:
   GoldCustomer();
   GoldCustomer(string firstName);
   GoldCustomer(string firstName, string lastName);

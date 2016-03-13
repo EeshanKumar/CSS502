@@ -64,6 +64,7 @@ bool BookStore::ProcessPurchase(Customer myCustomer, Book* myBook)
   if (purchasingCustomer == NULL)
   {
     *outStream << "Customer " << myCustomer.getFirstName() << " " << myCustomer.getLastName() << " not found" << endl;
+    delete myBook;
     return false;
   }
   Book* purchasedBook;
@@ -71,11 +72,15 @@ bool BookStore::ProcessPurchase(Customer myCustomer, Book* myBook)
   if (booksLeft == -1)
   {
     *outStream << "Book " << myBook->getTitle() << " not found" << endl;
+    delete myBook;
     return false;
   }
   float bookCost = purchasedBook->getCost();
+  bookCost = purchasingCustomer->applyDiscount(bookCost);
   balance += bookCost;
-  purchasingCustomer->incrementAmtSpent(bookCost);
+  float totalSpent = purchasingCustomer->incrementAndReturnAmtSpent(bookCost);
+  PurchaseTransaction* trans = new PurchaseTransaction("Purchase", bookCost, myBook);
+  purchasingCustomer->addTransactionToHistory(trans);
   return true;
 }
 

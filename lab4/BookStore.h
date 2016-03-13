@@ -6,6 +6,10 @@ using namespace std;
 #include "BST.h"
 #include "Customer.h"
 #include "Hash.h"
+#include "Transaction.h"
+#include "PurchaseTransaction.h"
+#include "ReturnTransaction.h"
+#include "TradeInTransaction.h"
 
 #ifndef BOOKSTORE_H
 #define BOOKSTORE_H
