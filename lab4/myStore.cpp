@@ -147,6 +147,15 @@ int main(int argc, char* argv[])
     age = atoi(token);
 
     Customer* insCustomer = new Customer(firstName, lastName, age);
+
+    // if (age > 65) {
+    //   SeniorCustomer* myCustomer = new SeniorCustomer(firstName, lastName, age);
+    //   insCustomer = myCustomer;
+    // }
+    // else
+    // {
+      // insCustomer = new Customer(firstName, lastName, age);o
+    // }
     myBookStore.AddCustomer(insCustomer);
   }
 
@@ -327,9 +336,11 @@ int main(int argc, char* argv[])
 
             Book* myBook = new Book(author, title);
             myBook->setQuality(quality);
+            Book* myCopiedBook = new Book(author, title);
+            myCopiedBook->setQuality(quality);
 
             //Do Stuff with myBook
-            myBookStore.ProcessReturn(myCustomer, myBook);
+            myBookStore.ProcessReturn(myCustomer, myBook, myCopiedBook);
             break;
           }
           case 'A':
@@ -348,11 +359,15 @@ int main(int argc, char* argv[])
             AudioBook* myAudioBook = new AudioBook(author, title);
             myAudioBook->setNarrator(narrator);
             myAudioBook->setQuality(quality);
+            AudioBook* myCopiedAudioBook = new AudioBook(author, title);
+            myCopiedAudioBook->setNarrator(narrator);
+            myCopiedAudioBook->setQuality(quality);
 
             Book* myBook = myAudioBook;
+            Book* myCopiedBook = myCopiedAudioBook;
 
             //Do Stuff with myBook
-            myBookStore.ProcessReturn(myCustomer, myBook);
+            myBookStore.ProcessReturn(myCustomer, myBook, myCopiedBook);
             break;
           }
           case 'G':
@@ -371,11 +386,15 @@ int main(int argc, char* argv[])
             GraphicNovel* myGraphicNovel = new GraphicNovel(author, title);
             myGraphicNovel->setArtist(artist);
             myGraphicNovel->setQuality(quality);
+            GraphicNovel* myCopiedGraphicNovel = new GraphicNovel(author, title);
+            myCopiedGraphicNovel->setArtist(artist);
+            myCopiedGraphicNovel->setQuality(quality);
 
             Book* myBook = myGraphicNovel;
+            Book* myCopiedBook = myCopiedGraphicNovel;
 
             //Do Stuff with myBook
-            myBookStore.ProcessReturn(myCustomer, myBook);
+            myBookStore.ProcessReturn(myCustomer, myBook, myCopiedBook);
             break;
           }
           default:
@@ -417,11 +436,11 @@ int main(int argc, char* argv[])
             newUsedType = token[0];
             string quality = string(1, newUsedType);
 
-            Book myBook(author, title, cost, quality);
+            Book* myBook = new Book(author, title, cost, quality);
+            Book* myCopiedBook = new Book(author, title, cost, quality);
 
             //Do Stuff with myBook
-            cout << "Trade in " << myBook.getTitle();
-            cout << " for " << myCustomer.getFirstName() << " " << myCustomer.getLastName() << endl;
+            myBookStore.ProcessTradeIn(myCustomer, myBook, myCopiedBook);
             break;
           }
           case 'A':
@@ -434,10 +453,14 @@ int main(int argc, char* argv[])
             newUsedType = token[0];
             string quality = string(1, newUsedType);
 
-            AudioBook myBook(author, title, cost, narrator, quality);
+            AudioBook* myAudioBook = new AudioBook(author, title, cost, narrator, quality);
+            AudioBook* myCopiedAudioBook = new AudioBook(author, title, cost, narrator, quality);
+
+            Book* myBook = myAudioBook;
+            Book* myCopiedBook = myCopiedAudioBook;
 
             //Do Stuff with myBook
-            cout << "Trade in " << myBook.getTitle() << " for " << myCustomer.getFirstName() << " " << myCustomer.getLastName() << endl;
+            myBookStore.ProcessTradeIn(myCustomer, myBook, myCopiedBook);
             break;
           }
           case 'G':
@@ -450,11 +473,14 @@ int main(int argc, char* argv[])
             newUsedType = token[0];
             string quality = string(1, newUsedType);
 
-            GraphicNovel myBook(author, title, cost, artist, quality);
+            GraphicNovel* myGraphicNovel = new GraphicNovel(author, title, cost, artist, quality);
+            GraphicNovel* myCopiedGraphicNovel = new GraphicNovel(author, title, cost, artist, quality);
+
+            Book* myBook = myGraphicNovel;
+            Book* myCopiedBook = myCopiedGraphicNovel;
 
             //Do Stuff with myBook
-            cout << "Trade in " << myBook.getTitle();
-            cout << " for " << myCustomer.getFirstName() << " " << myCustomer.getLastName() << endl;
+            myBookStore.ProcessTradeIn(myCustomer, myBook, myCopiedBook);
             break;
           }
           default:

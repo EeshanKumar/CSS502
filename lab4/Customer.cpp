@@ -75,7 +75,6 @@ bool Customer::setAmtSpent(float amtSpent)
   this->amtSpent = amtSpent;
   return true;
 }
-
 bool Customer::AddTransactionToHistory(Transaction* trans)
 {
   history.push_back(trans);
@@ -100,7 +99,7 @@ float Customer::ReturnCostOfPurchasedBook(Book* returnedBook)
 {
   for (int i = 0; i < history.size(); ++i)
   {
-    if (*(history[i]->getBook()) == *returnedBook)
+    if ((history[i]->getTransType() == "Purchase") && (*(history[i]->getBook()) == *returnedBook))
     {
       return history[i]->getTransAmount();
     }
