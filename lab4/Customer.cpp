@@ -7,21 +7,25 @@ ostream& operator<<(ostream &outStream, const Customer &customerToPrint)
 
 Customer::Customer()
 {
+  this->status = "normal";
 }
 Customer::Customer(string firstName)
 {
   this->firstName = firstName;
+  this->status = "normal";
 }
 Customer::Customer(string firstName, string lastName)
 {
   this->firstName = firstName;
   this->lastName = lastName;
+  this->status = "normal";
 }
 Customer::Customer(string firstName, string lastName, int age)
 {
   this->firstName = firstName;
   this->lastName = lastName;
   this->age = age;
+  this->status = "normal";
 }
 Customer::Customer(string firstName, string lastName, int age, float amtSpent)
 {
@@ -29,6 +33,7 @@ Customer::Customer(string firstName, string lastName, int age, float amtSpent)
   this->lastName = lastName;
   this->age = age;
   this->amtSpent = amtSpent;
+  this->status = "normal";
 }
 Customer::~Customer()
 {
@@ -54,6 +59,10 @@ float Customer::getAmtSpent() const
 {
   return amtSpent;
 }
+string Customer::getStatus() const
+{
+  return status;
+}
 
 bool Customer::setFirstName(string firstName)
 {
@@ -75,6 +84,12 @@ bool Customer::setAmtSpent(float amtSpent)
   this->amtSpent = amtSpent;
   return true;
 }
+bool Customer::setStatus(string status)
+{
+  this->status = status;
+  return true;
+}
+
 bool Customer::AddTransactionToHistory(Transaction* trans)
 {
   history.push_back(trans);
@@ -120,5 +135,9 @@ void Customer::PrintHistory(ostream& outStream) const
 
 float Customer::applyDiscount(float cost) const
 {
+  if (status == "gold")
+  {
+    return cost * 0.9;
+  }
   return cost;
 }

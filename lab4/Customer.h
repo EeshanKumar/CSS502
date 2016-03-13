@@ -22,11 +22,13 @@ public:
   string getLastName() const;
   int getAge() const;
   float getAmtSpent() const;
+  string getStatus() const;
 
   bool setFirstName(string firstName);
   bool setLastName(string lastName);
   bool setAge(int age);
   bool setAmtSpent(float amtSpent);
+  bool setStatus(string status);
 
   bool operator==(Customer rhs) const;
   bool operator!=(Customer rhs) const;
@@ -44,6 +46,7 @@ protected:
   string lastName;
   int age;
   float amtSpent = 0; //Can be negative (Customer has traded in more than they have purchsed)
+  string status = "normal";
   vector<Transaction*> history;
 };
 

@@ -146,17 +146,15 @@ int main(int argc, char* argv[])
     ss.getline(token, MAX_TITLE, ',');
     age = atoi(token);
 
-    Customer* insCustomer = new Customer(firstName, lastName, age);
-
-    // if (age > 65) {
-    //   SeniorCustomer* myCustomer = new SeniorCustomer(firstName, lastName, age);
-    //   insCustomer = myCustomer;
-    // }
-    // else
-    // {
-      // insCustomer = new Customer(firstName, lastName, age);o
-    // }
-    myBookStore.AddCustomer(insCustomer);
+    if (age > 65) {
+      SeniorCustomer* insCustomer = new SeniorCustomer(firstName, lastName, age);
+      myBookStore.AddCustomer(insCustomer);
+    }
+    else
+    {
+      Customer* insCustomer = new Customer(firstName, lastName, age);
+      myBookStore.AddCustomer(insCustomer);
+    }
   }
 
 
@@ -263,10 +261,8 @@ int main(int argc, char* argv[])
             myAudioBook->setNarrator(narrator);
             myAudioBook->setQuality(quality);
 
-            Book* myBook = myAudioBook;
-
             //Do Stuff with myBook
-            myBookStore.ProcessPurchase(myCustomer, myBook);
+            myBookStore.ProcessPurchase(myCustomer, myAudioBook);
             break;
           }
           case 'G':
@@ -286,10 +282,8 @@ int main(int argc, char* argv[])
             myGraphicNovel->setArtist(artist);
             myGraphicNovel->setQuality(quality);
 
-            Book* myBook = myGraphicNovel;
-
             //Do Stuff with myBook
-            myBookStore.ProcessPurchase(myCustomer, myBook);
+            myBookStore.ProcessPurchase(myCustomer, myGraphicNovel);
             break;
           }
           default:
@@ -363,11 +357,8 @@ int main(int argc, char* argv[])
             myCopiedAudioBook->setNarrator(narrator);
             myCopiedAudioBook->setQuality(quality);
 
-            Book* myBook = myAudioBook;
-            Book* myCopiedBook = myCopiedAudioBook;
-
             //Do Stuff with myBook
-            myBookStore.ProcessReturn(myCustomer, myBook, myCopiedBook);
+            myBookStore.ProcessReturn(myCustomer, myAudioBook, myCopiedAudioBook);
             break;
           }
           case 'G':
@@ -390,11 +381,8 @@ int main(int argc, char* argv[])
             myCopiedGraphicNovel->setArtist(artist);
             myCopiedGraphicNovel->setQuality(quality);
 
-            Book* myBook = myGraphicNovel;
-            Book* myCopiedBook = myCopiedGraphicNovel;
-
             //Do Stuff with myBook
-            myBookStore.ProcessReturn(myCustomer, myBook, myCopiedBook);
+            myBookStore.ProcessReturn(myCustomer, myGraphicNovel, myCopiedGraphicNovel);
             break;
           }
           default:
@@ -456,11 +444,8 @@ int main(int argc, char* argv[])
             AudioBook* myAudioBook = new AudioBook(author, title, cost, narrator, quality);
             AudioBook* myCopiedAudioBook = new AudioBook(author, title, cost, narrator, quality);
 
-            Book* myBook = myAudioBook;
-            Book* myCopiedBook = myCopiedAudioBook;
-
             //Do Stuff with myBook
-            myBookStore.ProcessTradeIn(myCustomer, myBook, myCopiedBook);
+            myBookStore.ProcessTradeIn(myCustomer, myAudioBook, myCopiedAudioBook);
             break;
           }
           case 'G':
@@ -476,11 +461,8 @@ int main(int argc, char* argv[])
             GraphicNovel* myGraphicNovel = new GraphicNovel(author, title, cost, artist, quality);
             GraphicNovel* myCopiedGraphicNovel = new GraphicNovel(author, title, cost, artist, quality);
 
-            Book* myBook = myGraphicNovel;
-            Book* myCopiedBook = myCopiedGraphicNovel;
-
             //Do Stuff with myBook
-            myBookStore.ProcessTradeIn(myCustomer, myBook, myCopiedBook);
+            myBookStore.ProcessTradeIn(myCustomer, myGraphicNovel, myCopiedGraphicNovel);
             break;
           }
           default:

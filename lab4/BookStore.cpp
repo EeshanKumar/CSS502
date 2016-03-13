@@ -83,11 +83,11 @@ bool BookStore::ProcessPurchase(Customer myCustomer, Book* myBook)
   balance += bookCost;
   float totalSpent = purchasingCustomer->IncrementAndReturnAmtSpent(bookCost);
 
-  // // Check for transitioning to Gold Customer status
-  // if (purchasingCustomer->applyDiscount(100) == 100 && totalSpent > 200)
-  // {
-  //   purchasingCustomer->setStatus("gold");
-  // }
+  // Check for transitioning to Gold Customer status
+  if (purchasingCustomer->applyDiscount(100) == 100 && totalSpent > 200)
+  {
+    purchasingCustomer->setStatus("gold");
+  }
 
   PurchaseTransaction* trans = new PurchaseTransaction("Purchase", bookCost, myBook);
   purchasingCustomer->AddTransactionToHistory(trans);
@@ -101,6 +101,7 @@ bool BookStore::ProcessReturn(Customer myCustomer, Book* myBook, Book* copiedBoo
   {
     *outStream << "Customer " << myCustomer.getFirstName() << " " << myCustomer.getLastName() << " not found" << endl;
     delete myBook;
+    delete copiedBook;
     return false;
   }
   float bookCost = purchasingCustomer->ReturnCostOfPurchasedBook(myBook);
@@ -108,6 +109,7 @@ bool BookStore::ProcessReturn(Customer myCustomer, Book* myBook, Book* copiedBoo
   {
     *outStream << "Customer never bought book " << myBook->getTitle() << endl;
     delete myBook;
+    delete copiedBook;
     return false;
   }
   inventory.InsertOrIncrement(myBook, 1);
@@ -124,6 +126,7 @@ bool BookStore::ProcessTradeIn(Customer myCustomer, Book* myBook, Book* copiedBo
   {
     *outStream << "Customer " << myCustomer.getFirstName() << " " << myCustomer.getLastName() << " not found" << endl;
     delete myBook;
+    delete copiedBook;
     return false;
   }
   inventory.InsertOrIncrement(myBook, 1);

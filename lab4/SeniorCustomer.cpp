@@ -2,25 +2,26 @@
 
 SeniorCustomer::SeniorCustomer()
 {
+  this->status = "senior";
 }
 SeniorCustomer::SeniorCustomer(string firstName): Customer(firstName)
 {
+  this->status = "senior";
 }
 SeniorCustomer::SeniorCustomer(string firstName, string lastName): Customer(firstName, lastName)
 {
+  this->status = "senior";
 }
 SeniorCustomer::SeniorCustomer(string firstName, string lastName, int age): Customer(firstName, lastName, age)
 {
+  this->status = "senior";
 }
 SeniorCustomer::SeniorCustomer(string firstName, string lastName, int age, float amtSpent): Customer(firstName, lastName, age, amtSpent)
 {
+  this->status = "senior";
 }
 SeniorCustomer::~SeniorCustomer()
 {
-  for (int i = 0; i < history.size(); ++i)
-  {
-     delete history[i];
-  }
 }
 
 float SeniorCustomer::applyDiscount(float cost) const
