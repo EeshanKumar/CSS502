@@ -1,28 +1,0 @@
-Inventory: 
-AudioBook: Boys In the Boat by Daniel Brown and narrated by Edward Hermann (New) $78.5
-Count: 3
-AudioBook: Harry Potter and the Chamber of Secrets by J.K. Rowling and narrated by Jim Dale (Good) $45.45
-Count: 2
-AudioBook: The Dying Grass by William Vollmann and narrated by Edward Hermann (New) $45.99
-Count: 6
-AudioBook: Unbroken by Laura Hillenbrand and narrated by Edward Hermann (New) $65
-Count: 15
-Book: Data Abstraction and Problem Solving by Frank Carrano (New) $120
-Count: 5
-Book: Practical C++ by Steve Oualline (Fair) $15
-Count: 1
-Book: Sound and Fury by William Faulkner (New) $19.33
-Count: 8
-Book: The Dying Grass by William Vollmann (New) $35.99
-Count: 6
-Book: The Thin Red Line by James Jones (New) $25
-Count: 10
-GraphicNovel: American Splendor 4 by Harvey Pekar with art by Crumb (Good) $10.23
-Count: 1
-GraphicNovel: Fables by Bill Willingham with art by Lan Medina (New) $76
-Count: 10
-GraphicNovel: The Sandman by Neil Gaiman with art by Sam Keith (Excellent) $33.33
-Count: 2
-GraphicNovel: Watchmen by Alan Moore with art by 24.00 (New) $0
-Count: 4
-0

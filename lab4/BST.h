@@ -21,7 +21,7 @@ public:
   ~BST();
 
 //Public Functions
-  int Insert(ItemType *item, int count);
+  int InsertOrIncrement(ItemType *item, int count);
   int RemoveOrDecrement(ItemType target, ItemType* &resultPtr);
   int Count(ItemType targetItem) const;
   int Height() const;
@@ -81,7 +81,7 @@ BST<ItemType>::~BST()
 }
 
 template <class ItemType>
-int BST<ItemType>::Insert( ItemType *item, int count )
+int BST<ItemType>::InsertOrIncrement( ItemType *item, int count )
 {
   return addToTree(this->root, NULL, item, count);
 }
@@ -174,6 +174,7 @@ int BST<ItemType>::addToTree(Node* &subTree, Node* parentNode, ItemType* item, i
   if (*(subTree->item) == *item)
   {
     subTree->count += count;
+    delete item;
     return subTree->count;
   }
   if (*item < *(subTree->item))
