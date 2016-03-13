@@ -1,0 +1,32 @@
+I
+P,Abraham,Lincoln,B,N,William Vollmann,The Dying Grass
+P,Gerald,Ford,G,N,Bill Willingham,Fables,Lan Medina
+P,Abraham,Lincoln,B,N,James Jones,The Thin Blue Line
+P,Johnny,Mathis,B,N,William Vollmann,The Dying Grass
+P,Abraham,Lincoln,B,U,J.K. Rowling,Harry Potter and the Chamber of Secrets,G
+P,Abraham,Lincoln,B,U,J.K. Rowling,Harry Potter and the Chamber of Secrets,G
+P,Abraham,Lincoln,B,U,J.K. Rowling,Harry Potter and the Chamber of Secrets,G
+P,Abraham,Lincoln,B,U,J.K. Rowling,Harry Potter and the Chamber of Secrets,G
+P,Abraham,Lincoln,B,U,J.K. Rowling,Harry Potter and the Chamber of Secrets,G
+P,Abraham,Lincoln,B,U,J.K. Rowling,Harry Potter and the Chamber of Secrets,G
+R,Abraham,Lincoln,B,N,Steve Oualline,Practical C++
+P,Abraham,Lincoln,B,N,James Jones,The Thin Red Line
+P,Abraham,Lincoln,B,U,Steve Oualline,Practical C++,F
+I
+P,George,Washington,B,U,Steve Oualline,Practical C++,F
+H,George,Washington
+R,Abraham,Lincoln,B,U,Steve Oualline,Practical C++,F
+P,George,Washington,B,U,Steve Oualline,Practical C++,F
+T,Lyndon,Johnson,A,Daniel Brown,Boys In the Boat,50.00,Edward Hermann,E
+P,Abraham,Lincoln,A,U,Daniel Brown,Boys In the Boat,Edward Hermann,E
+R,Abraham,Lincoln,B,U,J.K. Rowling,Harry Potter and the Chamber of Secrets,G
+R,Abraham,Lincoln,B,U,J.K. Rowling,Harry Potter and the Chamber of Secrets,G
+R,Abraham,Lincoln,B,U,J.K. Rowling,Harry Potter and the Chamber of Secrets,G
+R,Abraham,Lincoln,B,U,J.K. Rowling,Harry Potter and the Chamber of Secrets,G
+R,Abraham,Lincoln,B,U,J.K. Rowling,Harry Potter and the Chamber of Secrets,G
+R,Abraham,Lincoln,B,U,J.K. Rowling,Harry Potter and the Chamber of Secrets,G
+R,Abraham,Lincoln,B,U,J.K. Rowling,Harry Potter and the Chamber of Secrets,G
+R,Abraham,Lincoln,B,U,J.K. Rowling,Harry Potter and the Chamber of Secrets,G
+P,Abraham,Lincoln,B,U,J.K. Rowling,Harry Potter and the Chamber of Secrets,G
+H,Abraham,Lincoln
+I

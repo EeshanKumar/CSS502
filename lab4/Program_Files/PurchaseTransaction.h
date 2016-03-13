@@ -15,6 +15,9 @@ public:
   ~PurchaseTransaction();
 
   void Print(ostream &outStream) const;
+
+private:
+  bool returned = false;
 };
 
 #endif //PURCHASETRANSACTION_H

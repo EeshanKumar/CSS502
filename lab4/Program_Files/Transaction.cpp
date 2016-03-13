@@ -36,6 +36,10 @@ Book* Transaction::getBook() const
 {
   return refBook;
 }
+bool Transaction::getReturned() const
+{
+  return returned;
+}
 
 bool Transaction::setTransType(string transType)
 {
@@ -51,6 +55,10 @@ bool Transaction::setBook(Book* refBook)
 {
   this->refBook = refBook;
   return true;
+}
+bool Transaction::setReturned(bool returned)
+{
+  this->returned = returned;
 }
 
 ostream& operator<<(ostream &outStream, Transaction* transToPrint)

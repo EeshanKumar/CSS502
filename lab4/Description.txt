@@ -1,0 +1,12 @@
+My program is built on a myStore.cpp. It creates a BookStore called "myBookStore".
+
+The myStore.cpp takes in three file arguments. It parses all the files and calls the appropriate calls on the various programs.
+
+1. Loads all inventory
+2. Loads all customers
+3. Processes all the transactions
+
+Any failed transactions are printed to cerr
+Any output is printed to cout
+
+Inventory is sorted by Book Title then book type and then Book quality (New, Excellent, Good, Fair)

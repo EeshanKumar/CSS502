@@ -26,5 +26,5 @@ SeniorCustomer::~SeniorCustomer()
 
 float SeniorCustomer::applyDiscount(float cost, string type) const
 {
-  return cost * 0.85;
+  return round(100 * cost * 0.85) / 100;
 }

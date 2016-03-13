@@ -19,10 +19,12 @@ public:
   string getTransType() const;
   float getTransAmount() const;
   Book* getBook() const;
+  bool getReturned() const;
 
   bool setTransType(string transType);
   bool setTransAmt(float transAmt);
   bool setBook(Book* refBook);
+  bool setReturned(bool returned);
 
   virtual void Print(ostream &outStream) const = 0;
 
@@ -30,6 +32,7 @@ protected:
   string transType;
   float transAmt;
   Book* refBook;
+  bool returned = false;
 };
 
 #endif //TRANSACTION_H

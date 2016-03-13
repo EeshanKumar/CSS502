@@ -107,6 +107,7 @@ bool BookStore::ProcessPurchase(Customer myCustomer, Book* myBook)
     return false;
   }
   float bookCost = purchasedBook->getCost();
+  myBook->setCost(bookCost);
   bookCost = purchasingCustomer->applyDiscount(bookCost, purchasedBook->getType());
   balance += bookCost;
 
@@ -133,6 +134,7 @@ bool BookStore::ProcessReturn(Customer myCustomer, Book* myBook, Book* copiedBoo
     return false;
   }
   float bookCost = purchasingCustomer->ReturnCostOfPurchasedBook(myBook);
+  copiedBook->setCost(bookCost);
   if (bookCost == -1)
   {
     *errStream << "Customer never bought book " << myBook->getTitle() << endl;
@@ -168,6 +170,7 @@ bool BookStore::ProcessTradeIn(Customer myCustomer, Book* myBook, Book* copiedBo
   Book* getBookCost;
   inventory.RemoveOrDecrement(*copiedBook, getBookCost);
   float bookCost = getBookCost->getCost();
+  copiedBook->setCost(bookCost);
   TradeInTransaction* trans = new TradeInTransaction("Trade In", bookCost, copiedBook);
   purchasingCustomer->AddTransactionToHistory(trans);
   return true;

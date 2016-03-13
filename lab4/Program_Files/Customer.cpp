@@ -114,8 +114,9 @@ float Customer::ReturnCostOfPurchasedBook(Book* returnedBook)
 {
   for (int i = 0; i < history.size(); ++i)
   {
-    if ((history[i]->getTransType() == "Purchase") && (*(history[i]->getBook()) == *returnedBook))
+    if ((history[i]->getTransType() == "Purchase") && (*(history[i]->getBook()) == *returnedBook) && (!history[i]->getReturned()))
     {
+      history[i]->setReturned(true);
       return history[i]->getTransAmount();
     }
   }
@@ -137,7 +138,7 @@ float Customer::applyDiscount(float cost, string type) const
 {
   if (status == "gold" && type != "AudioBook")
   {
-    return cost * 0.9;
+    return round(100 * cost * 0.9) / 100;
   }
   return cost;
 }

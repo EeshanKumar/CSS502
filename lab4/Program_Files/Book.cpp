@@ -119,15 +119,15 @@ bool Book::setType(string type)
 
 bool Book::operator<(Book rBook) const
 {
-  if (this->type == rBook.type)
+  if (this->title == rBook.title)
   {
-    if (this->title == rBook.title)
+    if (this->type == rBook.type)
     {
       return this->quality < rBook.quality;
     }
-    return this->title < rBook.title;
+    return this->type < rBook.type;
   }
-  return this->type < rBook.type;
+  return this->title < rBook.title;
 }
 bool Book::operator<=(Book rBook) const
 {
@@ -139,15 +139,15 @@ bool Book::operator<=(Book rBook) const
 }
 bool Book::operator>(Book rBook) const
 {
-  if (this->type == rBook.type)
+  if (this->title == rBook.title)
   {
-    if (this->title == rBook.title)
+    if (this->type == rBook.type)
     {
       return this->quality > rBook.quality;
     }
-    return this->title > rBook.title;
+    return this->type > rBook.type;
   }
-  return this->type > rBook.type;
+  return this->title > rBook.title;
 }
 bool Book::operator>=(Book rBook) const
 {
