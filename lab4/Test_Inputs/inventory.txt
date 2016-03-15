@@ -1,0 +1,13 @@
+B,N,6,William Vollmann,The Dying Grass,35.99
+B,N,8,William Faulkner,Sound and Fury,19.33
+A,N,6,William Vollmann,The Dying Grass,45.99,Edward Hermann
+G,U,1,Harvey Pekar,American Splendor 4,10.23,Crumb,G
+B,U,10,J.K. Rowling,Harry Potter and the Chamber of Secrets,45.45,G
+B,N,5,Frank Carrano,Data Abstraction and Problem Solving,120.00
+B,U,1,Steve Oualline,Practical C++,15.00,F
+B,N,10,James Jones,The Thin Red Line,25.00
+G,N,4,Alan Moore,Watchmen,Dave Gibbons,24.00
+G,U,2,Neil Gaiman,The Sandman,33.33,Sam Keith,E
+G,N,10,Bill Willingham,Fables,76.00,Lan Medina
+A,N,15,Laura Hillenbrand,Unbroken,65,Edward Hermann
+A,N,3,Daniel Brown,Boys In the Boat,78.50,Edward Hermann
